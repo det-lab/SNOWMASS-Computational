@@ -7,9 +7,11 @@
 
 \chapter{End User Analysis for Particle Physics Computation}
 
-\authorlist{G. Davies, P. Onyisi, A. Roberts}
+\authorlist{G.~S.~Davies, P.~Onyisi, A.~Roberts}
    {(contributors from the community)}
 
+\section{Introduction}
+What do we talk about when we talk about analysis?
 
 Already we are boldly launched upon the deep; but soon we shall be lost in its unshored, harbourless immensities. Ere that come to pass; ere the Pequod’s weedy hull rolls side by side with the barnacled hulls of the leviathan; at the outset it is but well to attend to a matter almost indispensable to a thorough appreciative understanding of the more special leviathanic revelations and allusions of all sorts which are to follow.
 
@@ -26,6 +28,119 @@ Thus speak of the whale, the great Cuvier, and John Hunter, and Lesson, those li
 [ $\cdots$ ]
 
 Finally: It was stated at the outset, that this system would not be here, and at once, perfected. You cannot but plainly see that I have kept my word. But I now leave my cetological System standing thus unfinished, even as the great Cathedral of Cologne was left, with the crane still standing upon the top of the uncompleted tower. For small erections may be finished by their first architects; grand ones, true ones, ever leave the copestone to posterity. God keep me from ever completing anything. This whole book is but a draught---nay, but the draught of a draught. Oh, Time, Strength, Cash, and Patience!
+
+\section{Hardware Needs}
+
+\section{Analysis Ecosystems: Libraries, Languages, and Data Formats - Peter}
+No analysis software functions entirely on its own; any package is situated in the context of the input data it consumes, the output data it produces, the other software it depends on, and the way it is configured or embedded in other code. Because of this we talk about ``software ecosystems,'' groups of packages which are typically used together.
+
+Packages in an ecosystem typically have common data interchange formats and similar programming language interfaces. In some cases they may be distributed together as a single metapackage with overall versioning. There are two major ecosystems in HEP:
+\begin{itemize}
+    \item \textbf{ROOT}: hosted by CERN, the ROOT suite is a tightly-integrated set of libraries that cover a broad range of HEP analysis needs, including I/O, event loop execution (including a parallel distributed mode), histogramming, fitting and statistical analysis, and visualization. The libraries are written in C++ and that is still considered the primary language for its use, although the Python bindings (PyROOT) are very well supported and by construction expose essentially the full API.  Bindings for the R language are also currently supported. The ROOT libraries were developed to meet the specific needs of HEP experiments and as such provide solutions that are well-matched to HEP analysis problems, although this also means that use outside of HEP is extremely limited. The tightly-bound nature of ROOT means that using alternative software for any particular functionality can be very difficult. ROOT is undergoing a redesign (``ROOT 7'') which aims to improve interfaces with the benefit of modern C++ and the benefit of over 25 years of practical experience.
+    \item \textbf{Python}: this is a somewhat loose term for a set of tools, with Python as the primary language interface, introduced with the primary goal of enabling the use of software developed outside of HEP, in particular for machine learning. This ecosystem is still in development and has no single governance team. It tends to emphasize independent packages for different aspects of the analysis pipeline (so, for example, I/O is handled with a different package from histogramming). Development teams in this ecosystem are typically small and feature junior personnel. 
+\end{itemize}
+
+\subsection{Programming Languages}
+Users interact with software libraries and packages through programming languages. These can be separated into general-purpose languages which can be used for any task, and domain-specific languages (ROOT TCut, PAW kumac, etc.) which provide a restricted set of higher-level primitives which simplify certain operations. The two most commonly-used general-purpose languages in HEP are C++ and Python. Examples of domain-specific languages are the TCut syntax used for applying selections and constructing new variables in ROOT, and the kumac language used to control the old FORTRAN-based PAW suite.
+
+General-purpose languages, by definition, are extremely capable and are used to solve problems outside of HEP. Exposure to these languages is one of the major technical skills that is transferable outside the field. It is considered necessary for HEP students to develop familiarity with, and preferably proficiency in, at least one general-purpose language. It is not necessarily the case that the languages that are used in HEP are the ones prevalent in the industries that particle physicists transition to (for example, R is widely-used in data science and virtually unknown in HEP). Because of their complexity, the time it takes to train personnel in them, and the need to transfer responsibilities for maintaining code from one person to another, the diversity of general-purpose languages used in the field is strictly limited. By contrast, domain-specific languages historically have been easier to master due to the limited range of constructs available.
+
+HEP has had relatively few general-purpose languages in recent history. Until the early 2000s FORTRAN was commonplace. A desire to move to more modern and commonly-used languages drove a transition across the field to C++ (although there was competition, notably from Java); this was generally a top-down move imposed as new experiments were built or experimental upgrades were implemented. Often experiments found it valuable to use a second general-purpose language such as Python or tcl as a high-level scripting system for their data processing code. Python in particular came to be adopted by users as a convenient language and its simultaneous adoption as the standard language in machine learning has driven massive bottom-up adoption of the language. Availability of library bindings in various languages is extremely important for their use; both C++ and Python raise significant barriers to using libraries written in those languages elsewhere, although thanks to a lot of work the border between those two specific languages is relatively low.
+
+Python is not necessarily an optimal language for scientific computing. In its reference implementation, it is a fully interpreted language, making it much slower than C++ for many tasks. The speed issue creates a programming paradigm in which users express operations via intermediate libraries (such as numpy for data manipulation or TensorFlow for neural network construction), introducing what amount to mini-languages embedded in Python. For this reason there is interest in exploring languages that can combine the expressiveness and ease-of-use of Python with compilation to machine code; the most commonly-explored option is Julia. However it is clear that introducing another general-purpose language in HEP will require a very compelling case and it appears that the status quo regarding Python will continue for the foreseeable future, perhaps including the adoption of acceleration technologies such as numba.
+
+\subsection{Data Formats}
+Analysis data come in many forms:
+\begin{itemize}
+\item \textbf{Event data:} these consist of information, typically with a fixed but complex schema, describing individual events.
+\item \textbf{Histograms:} These summarize features extracted from event data.
+\item \textbf{Other summary data:} There are forms of summary data that cannot reasonably be expressed via histograms: sometimes tabular data is a better fit and more space-efficient, and sometimes the schema for the data is sufficiently complex that it makes sense to store a sui generis kind of object (such as for the results of fits).
+\item \textbf{Configuration data:} The configuration for running some software may be stored in a human-readable and -editable format, or in a binary format --- the latter is especially common when one package is configuring the operation of another. In either case, interacting with the stored configuration requires data access, and it may be possible to alter the configuration like any other kind of data. 
+\item \textbf{Metadata:} For end-user analysis, this tends to primarily be provenance tracking information.
+\end{itemize}
+
+File formats can describe both the overall container for data and the specific types of objects that can be stored. ROOT separates these fairly strictly, in that the ROOT file format can store essentially any C++ object, and ROOT objects can be serialized to formats other than ROOT files (such as JSON or XML). ROOT provides a number of pre-defined data objects, such as tables (known as TTrees) and histograms, and multiple objects can be present in the same file. Other data formats allow less freedom; for example, Apache Parquet merges the container and the data object and is only suitable for tabular data, while HDF5 files allow for a specific set of contained structures.
+
+It is important to note that analysis end-users very rarely interact directly with underlying file formats --- they are interested in the in-memory transient representation of data, rather than the persistent format, and the translation between the two is handled by libraries. The capabilities of specific formats may limit what users can do, and certain formats may provide more optimized storage, but otherwise the details are generally hidden from users. Therefore transitions in data format are easier to handle than those in libraries or languages. Newer versions of ROOT include the capability to read in data in CSV text format, sqlite files, or Apache Arrow.
+
+\subsection{Requirements for a Sustainable End-User Software Ecosystem}
+A choice of software stacks is becoming available for HEP analysis. It is generally thought that the ROOT and Python stacks have different strengths and will competitively coexist into the future.
+
+In order for the ecosystems to achieve long-term, sustainable success, we note the following requirements:
+\begin{itemize}
+    \item \textbf{Support of Personnel.} Unsupported software projects undergo ``code rot'' over time, a process where changes external to the package itself cause it to lose functionality. In the Python ecosystem, for example, the migration from Python 2 to Python 3 rendered old versions of packages unusable. For this reason alone, it is mandatory that any software that forms a key part of a HEP analysis ecosystem must have a maintainer who is able to provide the necessary level of support for the package. The community must understand that maintenance is a task of equivalent importance to developing new code, and recognize people's work appropriately. There must also be a mechanism for transferring responsibility for a package as necessary.
+    \item \textbf{Documentation and Training.} In particular it must be understood that ecosystems are used as a gestalt --- not as 
+    \item \textbf{Interoperability.} 
+\end{itemize}
+
+\section{Analysis Models}
+
+\section{Dataset Bookkeeping and Formats - Amy}
+\begin{comment}
+S. V. Chekanov, G. Gavalian, and N. A. Graf, “Jas4pp - a Data-Analysis Framework for Physics and Detector Studies”, arXiv:2011.05329 [physics.comp-ph ]] (pdf).
+ - Java-based programs make distribution and installation on Windows, Linux, Mac easy
+ - They mention excellent library support but it's not clear what libraries?
+ - based on JAIDA, the Java implementation of AIDA (Abstract Interfaces for Data Analysis)
+ - supports  LCIO [21] I/O library developed for ILC studies. Some examples of reading LCIO files using Jython code can be found in Appendix A.2 (and in the following sections).
+ - HiPO (High Performance Output data, from JLAB, has an XROOTD driver)
+ - ProMC, ProIO
+ - stores outputs with Java serialization method, can be binary format or XML 
+ 
+Jim Pivarski, Eduardo Rodrigues, Kevin Pedro, Oksana Shadura, Benjamin Krikler, Graeme A. Stewart. ”HL-LHC Computing Review Stage 2, Common Software Projects: Data Science Tools for Analysis”, arXiv:2202.02194 [physics.data-an] (pdf).
+- physicists are motivated to contribute
+- interoperability is key to supporting scientists
+- ROOT is the columnar data store that will always be with us.  But ROOT files might some day contain more than TTrees, in particular RNTuple is under active development
+- Apache Arrow, Apache Parquet now offer similary-efficient columnar storage and tese format are used by some collaborations
+- Why not databases, this is an obvious match to our access problems!  See Striped, ServiceX, SkyhookDM, Coffea's columnservice, Tiled
+
+J. V. Bennett, J. Guilliams, M. Hernandez Villanueva, D. E. Jaffe, P. J. Laycock, A. Panta, C. Serfon, I. Ueda. ”Belle II grid-based user analysis”, arXiv:2203.07564 [hep-ex] (pdf).
+
+Harrison B. Prosper, Sezen Sekmen, Gokhan Unel. ”Analysis Description Language: A DSL for HEP Analysis”, arXiv:2203.09886 [hep-ph] (pdf). (also relevant to CompF07)
+
+C. Backhouse. ”The CAFAna framework for neutrino analysis”, arXiv:2203.13768 [hep-ex] (pdf). (also under NF01)
+
+\end{comment}
+
+\section{Collaborative Software - Gavin}
+T. Aarrestad et al. [HEP Software Foundation], “HL-LHC Computing Review: Common Tools and Community Software”, arXiv:2008.13636 [physics.comp-ph ]] (pdf).
+
+Simone Campana, Alessandro Di Girolamo, Paul Laycock, Zach Marshall, Heidi Schellman, Graeme A Stewart. ”HEP computing collaborations for the challenges of the next decade”, arXiv:2203.07237 [physics.comp-ph] (pdf).
+
+Dave Casper, Maria Elena Monzani, Benjamin Nachman, Costas Andreopoulos, Stephen Bailey, Deborah Bard, et al. ”Software and Computing for Small HEP Experiments“, arXiv:2203.07645 [hep-ex] (pdf). (also under EF0, NF0, RF0, CF0)
+
+
+
+Code management, version control, Messaging, telework, Q&A platforms, forums ,wikis.
+
+Slack, Discord, Zulip 
+
+Containers are an important part of job submission.
+Some pieces of software are so platform dependent that it's sometimes nearly impossible to replicate the framework on another machine.
+
+Tools for collaboration
+
+git
+Many people love git
+Some people feel that more git training is needed
+
+communication
+Almost all use some kind of instant messaging (slack, skype, etc.)
+Fewer use bug tracking/project management
+
+Person-to-person & group communications
+Video & voice - Skype, Zoom, Vidyo, ...
+Synchronous chat - Skype, Slack, Zulip, Mattermost, Discord, ...
+Asynchronous text - email, Discourse, ...
+Do these platforms meet our needs? Should we seek better integration? Should we try to standardize across HEP?
+Should we prefer centralized (e.g. lab-hosted) or decentralized (user-controlled) models?
+Accessibility issues
+Overlap with training & documentation
+how much of “how to do things” lives in private or hard-to-search channels?
+How much do these tools enable “chatting with colleagues” and can we improve that?
+
+Should this include a discussion on software citations, such as via Zenodo or such?
+
+\section{Training - Amy}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
