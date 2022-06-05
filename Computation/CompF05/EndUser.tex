@@ -119,8 +119,18 @@ Jim Pivarski, Eduardo Rodrigues, Kevin Pedro, Oksana Shadura, Benjamin Krikler, 
 - Why not databases, this is an obvious match to our access problems!  See Striped, ServiceX, SkyhookDM, Coffea's columnservice, Tiled
 
 J. V. Bennett, J. Guilliams, M. Hernandez Villanueva, D. E. Jaffe, P. J. Laycock, A. Panta, C. Serfon, I. Ueda. ”Belle II grid-based user analysis”, arXiv:2203.07564 [hep-ex] (pdf).
+- ROOT files for storage and analysis
+- about 60 PB needed for all data (skimmed and simulation, not saving "original" data?)
+- collaboration feels that this is feasible storage-wise (although large) but that 10^12 events represents a data management challenge
+  -- Using Rucio for job submission and file resolution
+  -- Concerns about scalability
+- central question is: how do we fund what's needed for analysis after the experiment?
+  -- storage, computing, and networking services all cost money.  In particular, grid solutions require security upkeep and therefore may not be feasible long-term
+  -- software must remain usable (perhaps through containers)
+  -- float the idea of central facilities that provide needed services to experiments
 
 Harrison B. Prosper, Sezen Sekmen, Gokhan Unel. ”Analysis Description Language: A DSL for HEP Analysis”, arXiv:2203.09886 [hep-ph] (pdf). (also relevant to CompF07)
+
 
 C. Backhouse. ”The CAFAna framework for neutrino analysis”, arXiv:2203.13768 [hep-ex] (pdf). (also under NF01)
 
