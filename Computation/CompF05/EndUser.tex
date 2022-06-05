@@ -130,7 +130,12 @@ J. V. Bennett, J. Guilliams, M. Hernandez Villanueva, D. E. Jaffe, P. J. Laycock
   -- float the idea of central facilities that provide needed services to experiments
 
 Harrison B. Prosper, Sezen Sekmen, Gokhan Unel. ”Analysis Description Language: A DSL for HEP Analysis”, arXiv:2203.09886 [hep-ph] (pdf). (also relevant to CompF07)
-
+- emphasizes the need for semantic analysis to make collaboration with theory easier
+- also makes an analysis self-documenting (Amy: to a degree)
+- prefers a language-independent DSL, an "external DSL" for easier interoperability
+- identifies DSL requirements as (1) easily understood by a physicist, (2) unambiguous, (3) domain complete.  I feel like (1) and possibly (2) need more clarification for this to be a true requirement list
+- people do use the Analysis Description Language (analysis schools, Future Circular Collider studies), not clear if the use is limited to a specific group or groups, no complete LHC analysis yet
+- Obvious enhancement of existing DSL would be to re-write to target LLVM.  (Amy: huh, okay, maybe it is time to think about DSLs?)
 
 C. Backhouse. ”The CAFAna framework for neutrino analysis”, arXiv:2203.13768 [hep-ex] (pdf). (also under NF01)
 
@@ -176,6 +181,22 @@ How much do these tools enable “chatting with colleagues” and can we improve
 Should this include a discussion on software citations, such as via Zenodo or such?
 
 \section{Training - Amy}
+
+We do not have the expertise we need for the computational work of upcoming physics.
+
+Question: where can this work come from?
+
+\begin{itemize}
+\item Collaborations with industry are rare (are they, though, for GPU work?).  
+\item Collaborations with computer scientists are tougher than they appear.  Computer Scientists have a higher pay scale.  Also, much of our work is not interesting from a computer science perspective.
+\item We can grow our own.  There are serious barriers to this.  (1) Curriculum change - or at least asking students to double major - is a big ask.  (2) Stable career paths don't currently exist.  Research software engineers are often supported on soft money and computing work is not typically valued in the promotion or tenure process.
+\end{itemize}
+
+Training within standard physics curriculum (none)
+Training within groups (this burdens groups without access to computing expertise)
+Training within collaborations (a good argument for analysis reproducibility is its future usefulness for training)
+Training within fields (just getting started, Software Carpentry, Data Carpentry, FIRST-HEP, DANCE-Edu)
+Industry training opportunities
 
 \section{Thoughts}
 Must have support mechanisms for both bottom-up and top-down development \& long-term support
