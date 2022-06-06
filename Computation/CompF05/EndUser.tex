@@ -54,7 +54,22 @@ They don't have funding cycles?
 \paragraph{SGCI}
 
 
-\section{Hardware Needs - Peter}
+% \section{Hardware Needs - Peter}
+% \section{Hardware Needs}
+
+% \begin{table}
+%     \begin{center}
+%     \caption{\label{tbl:analysis_hw}Fraction of overall CPU and disk budget allocated to analysis activities, as projected by various experiments.}
+% \begin{tabular}{ccc}
+%     \hline\hline
+%     Experiment & CPU & Disk\\
+%     \hline
+%     ATLAS, HL-LHC \cite{ATLAS:2020pnm,Collaboration:2802918} & 7--8\% & 43--49\%\\
+%     \hline\hline
+% \end{tabular}
+% \end{center}
+% \end{table}
+% Let CompF4 handle this?
 
 \section{Analysis Ecosystems: Libraries, Languages, and Data Formats - Peter}
 No analysis software functions entirely on its own; any package is situated in the context of the input data it consumes, the output data it produces, the other software it depends on, and the way it is configured or embedded in other code. Because of this we talk about ``software ecosystems,'' groups of packages which are typically used together.
@@ -66,13 +81,19 @@ Packages in an ecosystem typically have common data interchange formats and simi
 \end{itemize}
 
 \subsection{Programming Languages}
-Users interact with software libraries and packages through programming languages. These can be separated into general-purpose languages which can be used for any task, and domain-specific languages (ROOT TCut, PAW kumac, etc.) which provide a restricted set of higher-level primitives which simplify certain operations. The two most commonly-used general-purpose languages in HEP are C++ and Python. Examples of domain-specific languages are the TCut syntax used for applying selections and constructing new variables in ROOT, and the kumac language used to control the old FORTRAN-based PAW suite.
+Users interact with software libraries and packages through programming languages. These can be separated into general-purpose languages (GPLs) which can be used for any task, and domain-specific languages (DSLs) (ROOT TCut, PAW kumac, etc.) which provide a restricted set of higher-level primitives which simplify certain operations. The two most commonly-used general-purpose languages in HEP are C++ and Python. Examples of domain-specific languages are the TCut syntax used for applying selections and constructing new variables in ROOT, and the kumac language used to control the old FORTRAN-based PAW suite.
 
 General-purpose languages, by definition, are extremely capable and are used to solve problems outside of HEP. Exposure to these languages is one of the major technical skills that is transferable outside the field. It is considered necessary for HEP students to develop familiarity with, and preferably proficiency in, at least one general-purpose language. It is not necessarily the case that the languages that are used in HEP are the ones prevalent in the industries that particle physicists transition to (for example, R is widely-used in data science and virtually unknown in HEP). Because of their complexity, the time it takes to train personnel in them, and the need to transfer responsibilities for maintaining code from one person to another, the diversity of general-purpose languages used in the field is strictly limited. By contrast, domain-specific languages historically have been easier to master due to the limited range of constructs available.
 
 HEP has had relatively few general-purpose languages in recent history. Until the early 2000s FORTRAN was commonplace. A desire to move to more modern and commonly-used languages drove a transition across the field to C++ (although there was competition, notably from Java); this was generally a top-down move imposed as new experiments were built or experimental upgrades were implemented. Often experiments found it valuable to use a second general-purpose language such as Python or tcl as a high-level scripting system for their data processing code. Python in particular came to be adopted by users as a convenient language and its simultaneous adoption as the standard language in machine learning has driven massive bottom-up adoption of the language. Availability of library bindings in various languages is extremely important for their use; both C++ and Python raise significant barriers to using libraries written in those languages elsewhere, although thanks to a lot of work the border between those two specific languages is relatively low.
 
 Python is not necessarily an optimal language for scientific computing. In its reference implementation, it is a fully interpreted language, making it much slower than C++ for many tasks. The speed issue creates a programming paradigm in which users express operations via intermediate libraries (such as numpy for data manipulation or TensorFlow for neural network construction), introducing what amount to mini-languages embedded in Python. For this reason there is interest in exploring languages that can combine the expressiveness and ease-of-use of Python with compilation to machine code; the most commonly-explored option is Julia. However it is clear that introducing another general-purpose language in HEP will require a very compelling case and it appears that the status quo regarding Python will continue for the foreseeable future, perhaps including the adoption of acceleration technologies such as numba.
+
+Domain-specific languages in HEP span a range of applicability, from specifying variable construction for specific histograms to the construction of statistical analysis to a complete event selection workflow \cite{Prosper:2022lnf}. In a meaningful sense this includes the expressions needed to control numpy/AwkwardArray/TensorFlow from Python, or to express operations using the ROOT RDataFrame; although formally these are library operations, analysts are expected to learn how to express their intent in terms of high-level operations while the details of execution are kept intentionally opaque. 
+
+Domain-specific languages have the advantage of providing high-level primitives which in principle permit optimization of the actual execution of the code. In particular this includes parallelization and acceleration, operations which analysts may be uncomfortable with or which require significant investment to implement properly but which can provide speed and capability improvements when available. The major disadvantage is the (usually) restricted scope of operations that can be expressed in DSLs, which are typically designed with specific tasks in mind and which may make it unnatural or impossible for users to do other things. This is particularly dangerous for DSLs that operate at the ``analysis description'' level; it is not clear that such languages can generalize reasonably between frontiers.
+
+Users can come to regard DSLs as primary parts of the analysis interface and the learning curve for them can be high. In particular, if there is more than one DSL relevant to a specific task, users may prefer to learn only one. If DSLs are linked to specific libraries or ecosystems, the synergies are liable to tie users to those technologies. 
 
 \subsection{Data Formats}
 Analysis data come in many forms:
@@ -88,17 +109,36 @@ File formats can describe both the overall container for data and the specific t
 
 It is important to note that analysis end-users very rarely interact directly with underlying file formats --- they are interested in the in-memory transient representation of data, rather than the persistent format, and the translation between the two is handled by libraries. The capabilities of specific formats may limit what users can do, and certain formats may provide more optimized storage, but otherwise the details are generally hidden from users. Therefore transitions in data format are easier to handle than those in libraries or languages. Newer versions of ROOT include the capability to read in data in CSV text format, sqlite files, or Apache Arrow.
 
+\subsection{Visualization}
+
 \subsection{Requirements for a Sustainable End-User Software Ecosystem}
 A choice of software stacks is becoming available for HEP analysis. It is generally thought that the ROOT and Python stacks have different strengths and will competitively coexist into the future.
 
 In order for the ecosystems to achieve long-term, sustainable success, we note the following requirements:
 \begin{itemize}
     \item \textbf{Support of Personnel.} Unsupported software projects undergo ``code rot'' over time, a process where changes external to the package itself cause it to lose functionality. In the Python ecosystem, for example, the migration from Python 2 to Python 3 rendered old versions of packages unusable. For this reason alone, it is mandatory that any software that forms a key part of a HEP analysis ecosystem must have a maintainer who is able to provide the necessary level of support for the package. The community must understand that maintenance is a task of equivalent importance to developing new code, and recognize people's work appropriately. There must also be a mechanism for transferring responsibility for a package as necessary.
-    \item \textbf{Documentation and Training.} In particular it must be understood that ecosystems are used as a gestalt --- not as 
-    \item \textbf{Interoperability.} 
+    \item \textbf{Documentation and Training.} Analysis software ecosystems are used as a gestalt --- not as a disconnected set of packages. 
+    \item \textbf{Interoperability.} Ecosystem lock-in can be a problem for multiple reasons. Packages that can only be used in a single ecosystem will not provide benefits to users not in that ecosystem. 
 \end{itemize}
 
-\section{Analysis Models - Gavin}
+\section{Analysis Models}
+Once analysis code is written, it must be run on data. An analysis pipeline may involve multiple stages of data reduction and different codes, executing on very different platforms.
+
+Analysis users value fast turn around --- being able to quickly answer physics questions. Because the rapidity with which analysis workflows can complete is paramount, data processing architectures which are well-suited to managed production workflows may not match well on to analysis tasks. Users often desire to run analyses on hardware that is under their control, and in fact such capability may be essential to allow users to develop, test, and debug their code. 
+
+\subsection{Scale}
+Users need to be able to scale code execution from a few events (for testing) to an experiment's full dataset (for actual analysis). The former requires interactive response, while the latter may require distributed execution (on a single cluster or across multiple sites). Interactive use historically has occurred via terminal sessions and visualization software native to the particular operating system and environment. Distributed execution has occurred on batch systems, either single-site or multi-site; in the latter case, especially if a federated computing model is adopted, complex issues of data locality and access, bookkeeping, job brokering, fair access, and so on arise.
+
+Particle physics problems are usually \textit{high-throughput}, not \textit{high-performance}, problems: that is, they consist of a very large number of fairly lightweight computations which are essentially independent of each other, and so do not require computing resources to appear as a single, very powerful image (as on a traditional supercomputer). Traditional tightly-coupled supercomputer execution environments such as OpenMPI are therefore not typically needed for HEP analysis applications and in fact may be detrimental as they do not exploit the fine granularity of HEP problems. However, the increasing exploitation of coprocessors and accelerators (such as GPUs) in HEP code requires libraries that couple CPU and GPU execution on a single node.
+
+Solutions that smoothly scale from small-scale interactive tests to full-data processing are desirable. In the absence of such solutions users face a barrier during the development of their analyses which can be quite substantial. Such solutions need to abstract away the execution of the event loop so that it can be executed on whatever resources are available, transparently to the user. Therefore by necessity they restrict the form of the user code to some extent. 
+
+
+\subsection{Interfaces}
+
+The ``traditional'' HEP analysis execution environment is a terminal. GUI applications add significantly more coding complexity and generally limited benefits, although they have been used (for example, in the ROOT PROOF suite, which still generally is invoked via a terminal). The use of a terminal allows terminal scripting languages, such as bash, to be used to orchestrate a workflow.
+
+There is a recent trend towards using \textit{notebooks}, particularly those provided by the Jupyter environment, as the main interface for user code execution. Jupyter notebooks, which are rendered in a browser but with a connection to a backend kernel at the actual code execution site, function essentially as recorded interactive terminal sessions with additional documentation and output visualization capabilities. Jupyter notebooks are ill-suited for execution as actual code and are instead primarily used to script libraries which (for example) spawn worker tasks to actually perform the requested computations.
 
 \section{Dataset Bookkeeping and Formats - Amy}
 \begin{comment}
