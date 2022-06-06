@@ -138,8 +138,20 @@ Harrison B. Prosper, Sezen Sekmen, Gokhan Unel. ”Analysis Description Language
 - Obvious enhancement of existing DSL would be to re-write to target LLVM.  (Amy: huh, okay, maybe it is time to think about DSLs?)
 
 C. Backhouse. ”The CAFAna framework for neutrino analysis”, arXiv:2203.13768 [hep-ex] (pdf). (also under NF01)
-
+- I feel like I need to re-read this paper (Amy)
+- ROOT format files
+- has been used by multiple neutrino experiments!
+- connected with STAN to provide MCMC + analytic derivatives
 \end{comment}
+
+\begin{itemize}
+  \item Raw data: overwhelmingly, custom binary formats that are specific to an experminent
+  \item Processed and/or skimmed data: ROOT, always and forever, and we all know it
+  \item Intermediate files that facilitate tool use: Parquet, Zarr, etc.  HDF5 is rarely used, its libraries are a bit painful and all the tools people want to use work with file formats that have friendlier IO libraries
+  \item Metadata (file metadata, run information, processing states): Databases, stand-alone text files, wikis.  Metadata is also often included in the data file.
+\end{itemize}
+
+
 
 \section{Collaborative Software - Gavin}
 T. Aarrestad et al. [HEP Software Foundation], “HL-LHC Computing Review: Common Tools and Community Software”, arXiv:2008.13636 [physics.comp-ph ]] (pdf).
