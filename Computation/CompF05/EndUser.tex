@@ -14,21 +14,6 @@
 \section{Introduction}
 What do we talk about when we talk about analysis?
 
-Already we are boldly launched upon the deep; but soon we shall be lost in its unshored, harbourless immensities. Ere that come to pass; ere the Pequod’s weedy hull rolls side by side with the barnacled hulls of the leviathan; at the outset it is but well to attend to a matter almost indispensable to a thorough appreciative understanding of the more special leviathanic revelations and allusions of all sorts which are to follow.
-
-It is some systematized exhibition of the whale in his broad genera, that I would now fain put before you. Yet is it no easy task. The classification of the constituents of a chaos, nothing less is here essayed. Listen to what the best and latest authorities have laid down.
-
-``No branch of Zoology is so much involved as that which is entitled Cetology,'' says Captain Scoresby, A.D. 1820~\cite{Comp5-Scoresby}.
-
-``It is not my intention, were it in my power, to enter into the inquiry as to the true method of dividing the cetacea into groups and families. $\cdots$ Utter confusion exists among the historians of this animal'' (sperm whale), says Surgeon Beale, A.D. 1839~\cite{Comp5-Beale}.
-
-``Unfitness to pursue our research in the unfathomable waters.'' ``Impenetrable veil covering our knowledge of the cetacea.''  ``A field strewn with thorns.'' ``All these incomplete indications but serve to torture us naturalists.''
-
-Thus speak of the whale, the great Cuvier, and John Hunter, and Lesson, those lights of zoology and anatomy.
-
-[ $\cdots$ ]
-
-Finally: It was stated at the outset, that this system would not be here, and at once, perfected. You cannot but plainly see that I have kept my word. But I now leave my cetological System standing thus unfinished, even as the great Cathedral of Cologne was left, with the crane still standing upon the top of the uncompleted tower. For small erections may be finished by their first architects; grand ones, true ones, ever leave the copestone to posterity. God keep me from ever completing anything. This whole book is but a draught---nay, but the draught of a draught. Oh, Time, Strength, Cash, and Patience!
 
 \section{People do software work} 
 
@@ -89,6 +74,8 @@ HEP has had relatively few general-purpose languages in recent history. Until th
 
 Python is not necessarily an optimal language for scientific computing. In its reference implementation, it is a fully interpreted language, making it much slower than C++ for many tasks. The speed issue creates a programming paradigm in which users express operations via intermediate libraries (such as numpy for data manipulation or TensorFlow for neural network construction), introducing what amount to mini-languages embedded in Python. For this reason there is interest in exploring languages that can combine the expressiveness and ease-of-use of Python with compilation to machine code; the most commonly-explored option is Julia. However it is clear that introducing another general-purpose language in HEP will require a very compelling case and it appears that the status quo regarding Python will continue for the foreseeable future, perhaps including the adoption of acceleration technologies such as numba.
 
+Visualizations are increasingly being done via web browsers (such as Jupyter notebooks or JSROOT). By far the dominant language in that environment is JavaScript, which is a language which particle physicists generally have very little experience in, and one where best practices have evolved very rapidly. If critial parts of the analysis ecosystem are written in this language, expertise will need to be maintained at some level.
+
 Domain-specific languages in HEP span a range of applicability, from specifying variable construction for specific histograms to the construction of statistical analysis to a complete event selection workflow \cite{Prosper:2022lnf}. In a meaningful sense this includes the expressions needed to control numpy/AwkwardArray/TensorFlow from Python, or to express operations using the ROOT RDataFrame; although formally these are library operations, analysts are expected to learn how to express their intent in terms of high-level operations while the details of execution are kept intentionally opaque. 
 
 Domain-specific languages have the advantage of providing high-level primitives which in principle permit optimization of the actual execution of the code. In particular this includes parallelization and acceleration, operations which analysts may be uncomfortable with or which require significant investment to implement properly but which can provide speed and capability improvements when available. The major disadvantage is the (usually) restricted scope of operations that can be expressed in DSLs, which are typically designed with specific tasks in mind and which may make it unnatural or impossible for users to do other things. This is particularly dangerous for DSLs that operate at the ``analysis description'' level; it is not clear that such languages can generalize reasonably between frontiers.
@@ -110,6 +97,14 @@ File formats can describe both the overall container for data and the specific t
 It is important to note that analysis end-users very rarely interact directly with underlying file formats --- they are interested in the in-memory transient representation of data, rather than the persistent format, and the translation between the two is handled by libraries. The capabilities of specific formats may limit what users can do, and certain formats may provide more optimized storage, but otherwise the details are generally hidden from users. Therefore transitions in data format are easier to handle than those in libraries or languages. Newer versions of ROOT include the capability to read in data in CSV text format, sqlite files, or Apache Arrow.
 
 \subsection{Visualization}
+
+End-user analysis relies critically on visualization to give feedback to the physicist. Plots allow the user to quickly understand characteristics of the data but also to debug code and workflow problems.
+
+Previous generations of analysis libraries supported interactive visualization through native graphics libraries; remote use involved the use of technologies such as remote X Windows. Over high latency links this can be extremely difficult to use and requires specific software to be installed on the user's machine. Recent trends exploit the near-universal availability of web browsers following common standards to offload rendering and interaction to the user's browser. This results in a more uniform experience across platforms and reduces external dependencies. This is the standard mode for code in Jupyter notebook environments (in particular the Python ecosystem) and is the baseline for future ROOT graphics.
+
+The ROOT ecosystem's visualization libraries are naturally matched to the specific HEP use case. Visualization in the Python ecosystem is typically handled through the Python matplotlib package, a standard for scientific plot creation; matplotlib does not directly support a number of common HEP plot forms or histogram structure formats, so additional libraries have been written to help bridge these boundaries.
+
+Although event displays are not typically used as part of an analysis workflow, they are still of interest to end users, and the same issues apply. Work is being done on experiment-agnostic event displays that render in browsers using JavaScript.
 
 \subsection{Requirements for a Sustainable End-User Software Ecosystem}
 A choice of software stacks is becoming available for HEP analysis. It is generally thought that the ROOT and Python stacks have different strengths and will competitively coexist into the future.
