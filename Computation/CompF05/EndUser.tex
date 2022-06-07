@@ -191,41 +191,59 @@ C. Backhouse. ”The CAFAna framework for neutrino analysis”, arXiv:2203.13768
 
 
 \section{Collaborative Software - Gavin}
+\begin{comment}
 T. Aarrestad et al. [HEP Software Foundation], “HL-LHC Computing Review: Common Tools and Community Software”, arXiv:2008.13636 [physics.comp-ph ]] (pdf).
 
 Simone Campana, Alessandro Di Girolamo, Paul Laycock, Zach Marshall, Heidi Schellman, Graeme A Stewart. ”HEP computing collaborations for the challenges of the next decade”, arXiv:2203.07237 [physics.comp-ph] (pdf).
 
 Dave Casper, Maria Elena Monzani, Benjamin Nachman, Costas Andreopoulos, Stephen Bailey, Deborah Bard, et al. ”Software and Computing for Small HEP Experiments“, arXiv:2203.07645 [hep-ex] (pdf). (also under EF0, NF0, RF0, CF0)
 
+\end{comment}
 
+At its heart, HEP research is collaborative in nature and as the complexity of the physics problems increases this necessitates the need to effectively and efficiently communicate and collaborate with peers.
+The size and available expertise of an experiment may dictate what tools can be employed. When talking about collaborative software one is considering code management, version control, communication software, forums, wikis, Q\&A platforms.
+%Reference the community survey
+\subsection{Tools for Collaboration}
 
-Code management, version control, Messaging, telework, Q\&A platforms, forums ,wikis.
-
-Slack, Discord, Zulip 
-
+\begin{itemize} 
+  \item Code Management and Version Control
+In terms of code management and version control, many people love git. Equally many feel that more git training is needed. However, some experiments also support subversion and CVS (the Concurrent Versioning System), in some cases for legacy code, and so expertise and exposure is still necessitated
+within experiments for these additional alternatives. Effort should be made to establish the use of a version control platform at the early stage of a user's research career. 
+  \item Communication
+In order to stay informed and in contact with collaborators all users use some form of instant messaging platform for both synchronous and asynchronous communication. Video and voice conferencing is dominated by the uptake of Zoom but other formats exsit and are still used, such as Skype, Vidyo). Email and phone communication are fast being overtaken as the primary method of communication by several platforms that offer IRC-style 
+features, persistent channels (or chat "rooms") organized by topic, private groups, and simple person-to-person direct messaging. Examples of such messaging programs include Slack, Zulip, Mattermost, Discord, Discource. 
+DO these platforms meet our needs? Should we seek better integration? Many offer integration with various communication tools to be able to switch between (for example, Slack integration with GitHub, Zoom, Google tools) but often at a premium, per-user cost basis (ablbeit with education/research based cost reduction). Indeed programs such as Zulip are open-source and afford 
+more control and zero financial burden at the cost of humanpower and resources to maintain them within a collaboration.
+Should we try to standardize across HEP?
+Should we prefer centralized (e.g. lab-hosted) or decentralized (user-controlled) models?
+  \item Software distribution
+Spack, UPS/UPD. What do the large experiments use?
+CVMFS.
 Containers are an important part of job submission.
 Some pieces of software are so platform dependent that it's sometimes nearly impossible to replicate the framework on another machine.
 
-Tools for collaboration
+  \item Project Management
+Fewer users empoy bug-tracking or project management tools. 
+Some users use programs such as Trello or Notion for project management or simple Google Docs/Sheets
+  \item Documentation
+Wikis, Doxygen. Did anyone teach you how to document your code?
+  
 
+\end{itemize}
+
+Discuss Zenodo /Arxiv here? They refer more to data preservation but are collaborative tools.
+\subsection{Accessibility issues}
+Overlaps with training \& documentation.
+How much of “how to do things” lives in private or hard-to-search channels?
+How much do these tools enable “chatting with colleagues” and can we improve that?
+
+\begin{comment}
+Tools for collaboration
 git
 Many people love git
 Some people feel that more git training is needed
+\end{comment}
 
-communication
-Almost all use some kind of instant messaging (slack, skype, etc.)
-Fewer use bug tracking/project management
-
-Person-to-person \& group communications
-Video \& voice - Skype, Zoom, Vidyo, ...
-Synchronous chat - Skype, Slack, Zulip, Mattermost, Discord, ...
-Asynchronous text - email, Discourse, ...
-Do these platforms meet our needs? Should we seek better integration? Should we try to standardize across HEP?
-Should we prefer centralized (e.g. lab-hosted) or decentralized (user-controlled) models?
-Accessibility issues
-Overlap with training \& documentation
-how much of “how to do things” lives in private or hard-to-search channels?
-How much do these tools enable “chatting with colleagues” and can we improve that?
 
 Should this include a discussion on software citations, such as via Zenodo or such?
 
