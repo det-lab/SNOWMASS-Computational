@@ -181,12 +181,21 @@ C. Backhouse. ”The CAFAna framework for neutrino analysis”, arXiv:2203.13768
 - connected with STAN to provide MCMC + analytic derivatives
 \end{comment}
 
+Data in the Cosmic Frontier falls into four categories, and each has an array of associated formats.  ROOT files are inescapable and present in virtually every type of analysis, although there are other formats in use:   
+
 \begin{itemize}
   \item Raw data: overwhelmingly, custom binary formats that are specific to an experminent
   \item Processed and/or skimmed data: ROOT, always and forever, and we all know it
   \item Intermediate files that facilitate tool use: Parquet, Zarr, etc.  HDF5 is rarely used, its libraries are a bit painful and all the tools people want to use work with file formats that have friendlier IO libraries
   \item Metadata (file metadata, run information, processing states): Databases, stand-alone text files, wikis.  Metadata is also often included in the data file.
 \end{itemize}
+
+The challenges we face that are directly related to file formats are
+
+\begin{itemize}
+  \item Preservation.  Reproducibility, training, and open science/FAIR are increasingly of interest and importance to the community.  Making full use of our data requires documentation about the format, software that can read the format and provide analysis utility, and extensive metadata so that analyzers can make interpret or make use of the data.  Related efforts include FAIR, TOPS, and more.  There are significant international investments in these efforts; US-based efforts will require funding models beyond the traditional short-term grant cycle.  Preservation efforts must be guaranteed for at least 10 years to see community uptake.
+  \item Interoperability. Re-using already-developed tools is an appealing way to reduce the software development burden that slows down experiments across the field.  To do this, data formats must be compatible with these tools.  The desire for interoperability has driven experiments to consider non-ROOT file formats like Parquet and HDF5.  This need has also created tools like uproot, which can read in ROOT files and present them in data formats that are compatible with common python libraries.
+\end{itemize} 
 
 
 
