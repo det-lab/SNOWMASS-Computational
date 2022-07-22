@@ -98,7 +98,7 @@ Analysis data come in many forms:
 \item \textbf{Histograms:} These summarize features extracted from event data.
 \item \textbf{Other summary data:} There are forms of summary data that cannot reasonably be expressed via histograms: sometimes tabular data is a better fit and more space-efficient, and sometimes the schema for the data is sufficiently complex that it makes sense to store a sui generis kind of object (such as for the results of fits).
 \item \textbf{Configuration data:} The configuration for running some software may be stored in a human-readable and -editable format, or in a binary format --- the latter is especially common when one package is configuring the operation of another. In either case, interacting with the stored configuration requires data access, and it may be possible to alter the configuration like any other kind of data. 
-\item \textbf{Metadata:} For end-user analysis, this tends to primarily be provenance tracking information.
+\item \textbf{Metadata:} For end-user analysis, this tends to primarily be provenance tracking and version information.
 \end{itemize}
 
 File formats can describe both the overall container for data and the specific types of objects that can be stored. ROOT separates these fairly strictly, in that the ROOT file format can store essentially any C++ object, and ROOT objects can be serialized to formats other than ROOT files (such as JSON or XML). ROOT provides a number of pre-defined data objects, such as tables (known as TTrees) and histograms, and multiple objects can be present in the same file. Other data formats allow less freedom; for example, Apache Parquet merges the container and the data object and is only suitable for tabular data, while HDF5 files allow for a specific set of contained structures.
@@ -160,12 +160,6 @@ Solutions that smoothly scale from small-scale interactive tests to full-data pr
 The ``traditional'' HEP analysis execution environment is a terminal. GUI applications add significantly more coding complexity and generally limited benefits, although they have been used (for example, in the ROOT PROOF suite, which still generally is invoked via a terminal). The use of a terminal allows terminal scripting languages, such as bash, to be used to orchestrate a workflow.
 
 There is a recent trend towards using \textit{notebooks}, particularly those provided by the Jupyter environment, as the main interface for user code execution. Jupyter notebooks, which are rendered in a browser but with a connection to a backend kernel at the actual code execution site, function essentially as recorded interactive terminal sessions with additional documentation and output visualization capabilities. Jupyter notebooks are ill-suited for execution as actual code and are instead primarily used to script libraries which (for example) spawn worker tasks to actually perform the requested computations.
-
-\subsection{Data Cataloging and Delivery}
-
-Users need to be able to obtain the input data for their analyses at the sites where their computation occurs. This means they must be able to discover where the data are stored and handle any data transfer/networking issues involved in bringing the data and compute resources together. 
-
-Standalone files that are considered opaque to data-handling and cataloging software, and only interpreted by end-user code, are not the only possible way to store and provide data. ``Intelligent'' infrastructure can provide a database-like view of datasets, enabling event selection and column reduction as a service (see e.g.\ \cite{Galewsky:2020xig}). User code need never interact with the ``native'' data format at all. In such an architecture the backend data store may itself be structured as a database \cite{Gutsche:2020kmd}.
 
 \subsection{Findings and Recommendations}
 Users need to be able to scale their analyses from simple tests on a small debugging dataset to full deployment over all data. In many cases this transition requires working in a different environment (a common case is transitioning from a local workstation, referring to specific files, to a batch job running on a catalogued dataset). This can involve significant difficulties for users and cause support issues.\\
@@ -230,6 +224,17 @@ The challenges we face that are directly related to file formats are
   \item Preservation.  Reproducibility, training, and open science/FAIR are increasingly of interest and importance to the community.  Making full use of our data requires documentation about the format, software that can read the format and provide analysis utility, and extensive metadata so that analyzers can make interpret or make use of the data.  Related efforts include FAIR, TOPS, and more.  There are significant international investments in these efforts; US-based efforts will require funding models beyond the traditional short-term grant cycle.  Preservation efforts must be guaranteed for at least 10 years to see community uptake.
   \item Interoperability. Re-using already-developed tools is an appealing way to reduce the software development burden that slows down experiments across the field.  To do this, data formats must be compatible with these tools.  The desire for interoperability has driven experiments to consider non-ROOT file formats like Parquet and HDF5.  This need has also created tools like uproot, which can read in ROOT files and present them in data formats that are compatible with common python libraries.
 \end{itemize} 
+
+
+\subsection{Data Cataloging and Delivery}
+
+Users need to be able to obtain the input data for their analyses at the sites where their computation occurs. This means they, or the analysis infrastructure, must be able to discover where the data are stored and handle any data transfer/networking issues involved in bringing the data and compute resources together.
+
+Data catalogs are useful even when the data are all stored in a single site, since they group related files into datasets and store useful, queryable metadata. When storage resources are distributed then catalogs become even more critical. Data placement is beyond the scope of this report but can be handled by systems that also provide a data catalog, such as Rucio \cite{Barisits:2019fyl}.
+
+Data delivery to analysis tasks can be handled in a number of ways. On a small scale, the data may be provided via a POSIX filesystem (possibly networked). At a large scale, the data may need to be copied or streamed between locations over a wide area network. When multiple sites are involved, issues of authentication and identity management need to be addressed; maintaining multiple distinct accounts can be a heavy burden to users. Federated identity management and token-based authorization can address these issues.  Data transfer to a user job from remote storage can be handled in various ways; a common HEP standard is the xrootd protocol. Large-scale, distributed storage in industry is generally provided via object stores, for which the S3 protocol is the natural choice.
+
+Standalone files that are considered opaque to data-handling and cataloging software, and only interpreted by end-user code, are not the only possible way to store and provide data. ``Intelligent'' infrastructure can provide a database-like view of datasets, enabling event selection and column reduction as a service (see e.g.\ \cite{Galewsky:2020xig}). User code need never interact with the ``native'' data format at all. In such an architecture the backend data store may itself be structured as a database \cite{Gutsche:2020kmd}. Work in this direction may be able to leverage advances in computational storage technology.
 
 \subsection{Findings and Recommendations}
 Experiments usually have global solutions for handling metadata involved in dataset cataloging and workflow control. However these solutions frequently are not available for individual analyses and users may need to develop bespoke solutions.\\
@@ -297,8 +302,8 @@ Some people feel that more git training is needed
 Should this include a discussion on software citations, such as via Zenodo or such?
 
 \subsection{Findings and Recommendations}
-The “full” analysis stack of an experiment also includes software that enables interaction between analyzers. This includes documentation of the experiment’s code, messaging between users, discussion forums, software version control, bug tracking, and document workflow management. Especially for small experiments, setting up this infrastructure from scratch can be daunting both in effort and cost.
-\textit{Recommendation.} Host laboratories should provide a full stack of these services to experiments.  XSEDE/ACES could also play an important role here as some laboratories have onerous access requirements.
+The “full” analysis stack of an experiment also includes software that enables interaction between analyzers. This includes documentation of the experiment’s code, messaging between users, discussion forums, software version control, bug tracking, and document workflow management. Especially for small experiments, setting up this infrastructure from scratch can be daunting both in effort and cost.\\
+\textit{Recommendation.} Access to a full stack of these services should be provided to funded experiments.  XSEDE/ACES could also play an important role here as some laboratories have onerous access requirements.
 
 \section{Training - Amy}
 
@@ -320,12 +325,12 @@ Industry training opportunities
 
 \subsection{Findings and Recommendations}
 There are many cases where experiments are limited by the availability of personnel trained in various aspects of computing. All students need to be trained in the software and languages used for analysis; beyond that, specialized training may be needed for specific areas, such as GPU use or code optimization. Many traditional avenues (e.g. dedicated academic classes or industry training) may not be a good match to needs or affordable. There are significant efforts through the HEP Software Foundation and other initiatives to develop effective training for HEP software. Software training has a direct connection to concerns about diversity, equity, and inclusion.\\
-\textit{Recommendation.} the scalability of various approaches to training should be understood. Best practices from education research, industry, and assessment should be incorporated into efforts. Funding should be made available for the development and hosting of training materials and should include partnerships with education researchers.
+\textit{Recommendation.} The scalability of various approaches to training should be understood. Best practices from education research, industry, and assessment should be incorporated into efforts. Funding should be made available for the development and hosting of training materials and should include partnerships with education researchers.
 
 \section{Long-Term Preservation}
 \subsection{Findings and Recommendations}
 Transitioning from the way an analysis is actually done to a “packaged” version that can be rerun by an outsider from scratch is typically complex, as the entire workflow is rarely described in a single place. This causes people to see long-term preservation as an additional burden whose benefits they will not see.\\
-\textit{Recommendation.} provide pipelines to nudge users into choosing practices compatible with long-term preservation as the default. These need to be considered and built in to the structure of analysis systems at the start, not bolted on at the end.
+\textit{Recommendation.} Provide pipelines to nudge users into choosing practices compatible with long-term preservation as the default. These need to be considered and built in to the structure of analysis systems at the start, not bolted on at the end.
 
 \section{Thoughts}
 Must have support mechanisms for both bottom-up and top-down development \& long-term support
