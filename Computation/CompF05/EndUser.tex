@@ -11,8 +11,21 @@
 \authorlist{G.~S.~Davies, P.~Onyisi, A.~Roberts}
    {(contributors from the community)}
 
+\section{Executive Summary}
+
 \section{Introduction}
-What do we talk about when we talk about analysis?
+When talking about End User Analysis we refer to the extraction of physics results from reconstructed and simulated experimental data. High energy physics experiments produce systems for performing common reconstruction, calibration, and simulation tasks which result in shared data samples. These detailed data samples are then reduced to produce a range of analysis samples, often optimized for a particular physics topic by trigger or data object selection. End users (analyzers) then analyze those samples to produce physics results.
+
+Data analysis is generally I/O intensive and repeated many times during an experiments lifetime as selections and algorithms are refined. In many cases end user analysis is performed on local computing clusters, or even laptops, although dedicated facilities for parallel analysis of large samples also play an important role.
+
+Analysis activities include, but are not limited to:
+\begin{itemize}
+  \item Calibration
+  \item Feature detection (Higgs discovery)
+  \item Limit setting (searches)
+  \item Parameter estimation (W mass measurement, CP violdation)
+  \item Cross section measurements
+\end{itemize}
 
 
 \section{People do software work} 
@@ -34,9 +47,11 @@ The PDG is recognized as important despite not being innovative.  We all expect 
 \paragraph{ROOT}
 They don't have funding cycles?
 
-\paragraph{XSEDE ECSS}
+\paragraph{XSEDE ACCESS}
 
 \paragraph{SGCI}
+
+\paragraph{CTEQ}
 
 \subsection{Findings and Recommendations}
 A lot of transformative ideas are introduced to the HEP computing community and are implemented by early-career scientists (especially grad students and postdocs). Support for these physicists can be minimal, and the career trajectories are opaque.\\
@@ -64,13 +79,13 @@ No analysis software functions entirely on its own; any package is situated in t
 
 Packages in an ecosystem typically have common data interchange formats and similar programming language interfaces. In some cases they may be distributed together as a single metapackage with overall versioning. There are two major ecosystems in HEP:
 \begin{itemize}
-    \item \textbf{ROOT} \cite{Brun:1997pa}: hosted by CERN, the ROOT suite is a tightly-integrated set of libraries that cover a broad range of HEP analysis needs, including I/O, event loop execution (including a parallel distributed mode), histogramming, fitting and statistical analysis, and visualization. The libraries are written in C++ and that is still considered the primary language for its use, although the Python bindings (PyROOT) are very well supported and by construction expose essentially the full API.  Bindings for the R language are also currently supported. The ROOT libraries were developed to meet the specific needs of HEP experiments and as such provide solutions that are well-matched to HEP analysis problems, although this also means that use outside of HEP is limited. The integrated, tightly-bound nature of ROOT means that using alternative software for any particular functionality can be difficult. ROOT is undergoing a redesign \cite{Naumann:2022pub} (``ROOT 7'') which aims to improve interfaces with the benefit of modern C++ and the benefit of over 25 years of practical experience. 
-    \item \textbf{Python}: this is a somewhat loose term for a set of tools, with Python as the primary language interface, introduced with the primary goal of enabling the use of software developed outside of HEP, in particular for machine learning. Many core packages in this ecosystem are part of the Scikit-HEP \cite{Rodrigues:2020syo} and IRIS-HEP \cite{IRISHEPWEB} projects. This ecosystem is still in development and has no single governance team. It tends to emphasize independent packages for different aspects of the analysis pipeline (so, for example, I/O is handled with a different package from histogramming). Due to a standard and extensive set of tools aimed at supporting development of open source Python packages (the pypi package repository, github actions for continuous integration, documentation hosting on readthedocs) the barriers to entry for new software in this ecosystem are quite low. Development teams in this ecosystem are typically small and feature junior personnel. 
+    \item \textbf{ROOT} \cite{Brun:1997pa}: the ROOT suite is a tightly-integrated set of libraries that cover a broad range of HEP analysis needs, including I/O, event loop execution (including a parallel distributed mode), histogramming, fitting and statistical analysis, and visualization. The libraries are written in C++ and that is still considered the primary language for its use, although the Python bindings (PyROOT) are very well supported and by construction expose essentially the full API.  Bindings for the R language are also currently supported. The ROOT libraries were developed to meet the specific needs of HEP experiments and as such provide solutions that are well-matched to HEP analysis problems, although this also means that use outside of HEP is limited. The integrated, tightly-bound nature of ROOT means that using alternative software for any particular functionality can be difficult. ROOT is undergoing a redesign \cite{Naumann:2022pub} (``ROOT 7'') which aims to improve interfaces with the benefit of modern C++ and the benefit of over 25 years of practical experience. ROOT is hosted by CERN with significant contributions from US partners, particularly in the area of I/O.
+    \item \textbf{Python} \cite{van1995python,10.5555/1593511}: this is a somewhat loose term for a set of tools, with Python as the primary language interface, introduced with the primary goal of enabling the use of software developed outside of HEP, in particular for machine learning. Many core packages in this ecosystem are part of the Scikit-HEP \cite{Rodrigues:2020syo} and IRIS-HEP \cite{IRISHEPWEB} projects. This ecosystem is still in development and has no single governance team. It tends to emphasize independent packages for different aspects of the analysis pipeline (so, for example, I/O is handled with a different package from histogramming). Due to a standard and extensive set of tools aimed at supporting development of open source Python packages (the pypi package repository, github actions for continuous integration, documentation hosting on readthedocs) the barriers to entry for new software in this ecosystem are quite low. Development teams in this ecosystem are typically small and feature junior personnel.
 \end{itemize}
 
 The long history of ROOT in HEP means that similar featuresets have sometimes been developed more than once, in incompatible fashions. For example, parallel processing of events on a single node was supported by PROOF Lite, the implicit multithreading feature for executing queries on TTrees, and RDataFrame. In the Python ecosystem a similar situation arises due to simultaneous development and shorter development cycles.
 
-Ecosystems associated with other programming languages, notably Java \cite{Chekanov:2020bja}, Go \cite{Binet:2018xcc}, and Julia, have been developed and seen use in certain situations. Adoption of these is coupled to use of the relevant languages in the community, which at the moment is minimal.
+Ecosystems associated with other programming languages, notably Java \cite{Chekanov:2020bja}, Go \cite{Binet:2018xcc}, and Julia~\cite{bezanson2017julia}, have been developed and seen use in certain situations. Adoption of these is coupled to use of the relevant languages in the community, which at the moment is minimal.
 
 \subsection{Programming Languages}
 Users interact with software libraries and packages through programming languages. These can be separated into general-purpose languages (GPLs) which can be used for any task, and domain-specific languages (DSLs) (ROOT TCut, PAW kumac, etc.) which provide a restricted set of higher-level primitives which simplify certain operations. The two most commonly-used general-purpose languages in HEP are C++ and Python. Examples of domain-specific languages are the TCut syntax used for applying selections and constructing new variables in ROOT, and the kumac language used to control the old FORTRAN-based PAW suite.
@@ -79,17 +94,17 @@ General-purpose languages, by definition, are extremely capable and are used to 
 
 HEP has had relatively few general-purpose languages in recent history. Until the early 2000s FORTRAN was commonplace. A desire to move to more modern and commonly-used languages drove a transition across the field to C++ (although there was competition, notably from Java); this was generally a top-down move imposed as new experiments were built or experimental upgrades were implemented. Often experiments found it valuable to use a second general-purpose language such as Python or tcl as a high-level scripting system for their data processing code. Python in particular came to be adopted by users as a convenient language and its simultaneous adoption as the standard language in machine learning has driven massive bottom-up adoption of the language. Availability of library bindings in various languages is extremely important for their use; both C++ and Python raise significant barriers to using libraries written in those languages elsewhere, although thanks to a lot of work the border between those two specific languages is relatively low.
 
-Python is not necessarily an optimal language for scientific computing. In its reference implementation, it is a fully interpreted language, making it much slower than C++ for many tasks. The speed issue creates a programming paradigm in which users express operations via intermediate libraries (such as numpy for data manipulation or TensorFlow for neural network construction), introducing what amount to mini-languages embedded in Python. For this reason there is interest in exploring languages that can combine the expressiveness and ease-of-use of Python with compilation to machine code; the most commonly-explored option is Julia \cite{Stanitzki:2020bnx}. However it is clear that introducing another general-purpose language in HEP will require a very compelling case and it appears that the status quo regarding Python will continue for the foreseeable future, perhaps including the adoption of acceleration technologies such as numba \cite{10.1145/2833157.2833162}.
+Python is not necessarily an optimal language for scientific computing~\cite{876288}. In its reference implementation, it is a fully interpreted language, making it much slower than C++ for many tasks. The speed issue creates a programming paradigm in which users express operations via intermediate libraries (such as numpy~\cite{harris2020array} for data manipulation or TensorFlow~\cite{tensorflow_developers_2022_6574269} for neural network construction), introducing what amount to mini-languages embedded in Python. For this reason there is interest in exploring languages that can combine the expressiveness and ease-of-use of Python with compilation to machine code; the most commonly-explored option is Julia~\cite{Stanitzki:2020bnx}. However it is clear that introducing another general-purpose language in HEP will require a very compelling case and it appears that the status quo regarding Python will continue for the foreseeable future, perhaps including the adoption of acceleration technologies such as numba~\cite{10.1145/2833157.2833162}.
 
-Visualizations are increasingly being done via web browsers (such as Jupyter notebooks or JSROOT). By far the dominant language in that environment is JavaScript, which is a language which particle physicists generally have very little experience in, and one where best practices have evolved very rapidly. If critial parts of the analysis ecosystem are written in this language, expertise will need to be maintained at some level.
+Visualizations are increasingly being steered from web browsers (such as Jupyter notebooks~\cite{soton403913} or JSROOT). By far the dominant language in that environment is JavaScript, which is a language which particle physicists generally have very little experience in, and one where best practices have evolved very rapidly. If critial parts of the analysis ecosystem are written in this language, expertise will need to be maintained at some level.
 
 Ideally it would be possible to seamlessly code written in different languages in a single application. This is extremely difficult to achieve in the general case due to languages' different memory layouts, calling conventions, and assumed invariants. Specific pairings, such as Python/C++, have solutions for interoperation. A general solution could involve leveraging languages' foreign function interfaces (FFI) through some common layer, such as the LLVM \cite{LLVM:CGO04} Intermediate Representation.
 
-Domain-specific languages in HEP span a range of applicability, fincluding steering reconstruction workflows \cite{Bennett:2022gyi}, specifying operations in columnar analysis \cite{Proffitt:2021wfh}, specifying likelihood construction from histograms \cite{TRexFitter}, and describing analysis at a very high level \cite{Prosper:2022lnf}. In a meaningful sense this includes the expressions needed to control numpy/AwkwardArray/TensorFlow from Python, or to express operations using the ROOT RDataFrame \cite{Piparo:2019xdy}; although formally these are library operations, analysts are expected to learn how to express their intent in terms of high-level operations while the details of execution are kept intentionally opaque. 
+Domain-specific languages in HEP span a range of applicability, including steering reconstruction workflows \cite{Bennett:2022gyi}, specifying operations in columnar analysis \cite{Proffitt:2021wfh}, specifying likelihood construction from histograms \cite{TRexFitter}, and describing analysis at a very high level \cite{Prosper:2022lnf}. In a meaningful sense this includes the expressions needed to control numpy~\cite{harris2020array}/AwkwardArray~\cite{jim_pivarski_2020_3952674}/TensorFlow~\cite{tensorflow_developers_2022_6574269} from Python, or to express operations using the ROOT RDataFrame \cite{Piparo:2019xdy}; although formally these are library operations, analysts are expected to learn how to express their intent in terms of high-level operations while the details of execution are kept intentionally opaque. 
 
 Domain-specific languages have the advantage of providing high-level primitives which in principle permit optimization of the actual execution of the code. In particular this includes parallelization and acceleration, operations which analysts may be uncomfortable with or which require significant investment to implement properly but which can provide speed and capability improvements when available. The major disadvantage is the (usually) restricted scope of operations that can be expressed in DSLs, which are typically designed with specific tasks in mind and which may make it unnatural or impossible for users to do other things. This is particularly dangerous for DSLs that operate at the ``analysis description'' level; it is not clear that such languages can generalize reasonably between frontiers.
 
-Users can come to regard DSLs as primary parts of the analysis interface and the learning curve for them can be high. In particular, if there is more than one DSL relevant to a specific task, users may prefer to learn only one. If DSLs are linked to specific libraries or ecosystems, the synergies are liable to tie users to those technologies. 
+Users can come to regard DSLs as primary parts of the analysis interface and the learning curve for them can be high. In particular, if there is more than one DSL relevant to a specific task, users may prefer to learn only one. If DSLs are linked to specific libraries or ecosystems, the synergies are liable to tie users to those technologies.
 
 \subsection{Data Formats}
 Analysis data come in many forms:
@@ -103,15 +118,15 @@ Analysis data come in many forms:
 
 File formats can describe both the overall container for data and the specific types of objects that can be stored. ROOT separates these fairly strictly, in that the ROOT file format can store essentially any C++ object, and ROOT objects can be serialized to formats other than ROOT files (such as JSON or XML). ROOT provides a number of pre-defined data objects, such as tables (known as TTrees) and histograms, and multiple objects can be present in the same file. Other data formats allow less freedom; for example, Apache Parquet merges the container and the data object and is only suitable for tabular data, while HDF5 files allow for a specific set of contained structures.
 
-It is important to note that analysis end-users very rarely interact directly with underlying file formats --- they work with in the in-memory transient representation of data, rather than the persistent format, and the translation between the two is handled by libraries. The capabilities of specific formats may limit what users can do, and certain formats may provide more optimized storage, but otherwise the details are generally hidden from users. Therefore transitions in data format are easier to handle than those in libraries or languages. Newer versions of ROOT include the capability to read in data in CSV text format, sqlite files, or Apache Arrow.
+It is important to note that analysis end-users very rarely interact directly with underlying file formats --- they work with in the in-memory transient representation of data, rather than the persistent format, and the translation between the two is handled by libraries. The capabilities of specific formats may limit what users can do, and certain formats may provide more optimized storage, but otherwise the details are generally hidden from users. Therefore transitions in data format are easier to handle than those in libraries or languages. Newer versions of ROOT include the capability to read in data in CSV text format, sqlite files, or Apache Arrow~\cite{Arrow}.
 
 \subsection{Visualization}
 
 End-user analysis relies critically on visualization to give feedback to the physicist. Plots allow the user to quickly understand characteristics of the data but also to debug code and workflow problems.
 
-Previous generations of analysis libraries supported interactive visualization through native graphics libraries; remote use involved the use of technologies such as remote X Windows. Over high latency links this can be extremely difficult to use and requires specific software to be installed on the user's machine. Recent trends exploit the near-universal availability of web browsers following common standards to offload rendering and interaction to the user's browser. This results in a more uniform experience across platforms and reduces external dependencies. This is the standard mode for code in Jupyter notebook environments (in particular the Python ecosystem) and is the baseline for future ROOT graphics.
+Previous generations of analysis libraries supported interactive visualization through native graphics libraries; remote use involved the use of technologies such as remote X Windows. Over high latency links this can be extremely difficult to use and requires specific software to be installed on the user's machine. Recent trends exploit the near-universal availability of web browsers following common standards to offload rendering and interaction to the user's browser. This results in a more uniform experience across platforms and reduces external dependencies. This is the standard mode for code in Jupyter~\cite{soton403913} notebook environments (in particular the Python ecosystem) and is the baseline for future ROOT graphics.
 
-The ROOT ecosystem's visualization libraries are naturally matched to the specific HEP use case. Visualization in the Python ecosystem is typically handled through the Python matplotlib package, a standard for scientific plot creation; matplotlib does not directly support a number of common HEP plot forms or histogram structure formats, so additional libraries have been written to help bridge these boundaries.
+The ROOT ecosystem's visualization libraries are naturally matched to the specific HEP use case. Visualization in the Python ecosystem is typically handled through the Python matplotlib~\cite{Hunter:2007} package, a standard for scientific plot creation; matplotlib does not directly support a number of common HEP plot forms or histogram structure formats, so additional libraries have been written to help bridge these boundaries.
 
 Although event displays are not typically used as part of an analysis workflow, they are still of interest to end users, and the same issues apply. Work is being done on experiment-agnostic event displays that render in browsers using JavaScript.
 
@@ -135,11 +150,11 @@ The main general purpose languages used in HEP today are C++ and Python. Project
 A number of domain-specific languages have been proposed to address problems in various spheres. Additionally, certain uses of Python (e.g. when scripting ML libraries, or working with RDataFrame) can be viewed as a DSL as they require library-specific knowledge.\\
 \textit{Recommendation.} ``High-level'' DSLs that attempt to describe analysis via high-level objects are unlikely to generalize well between experiments as often the ``primitives'' are too different, but can be useful in certain situations. The lower-level DSLs can be extremely useful where relevant, however effort should be taken to avoid unnecessary duplication of scope as this imposes burdens on users similar to using multiple general purpose languages.
 
-The ROOT container file format is ubiquitous in HEP, and comes with a serialization scheme tightly linked to the ROOT libraries. Industry and non-HEP tools typically use other formats (e.g. Apache Parquet for the ROOT TTree), and efforts are ongoing to enable their use. In addition the ROOT team foresees an evolution of the TTree to the more-optimized RNtuple. Multiple independent implementations of ROOT I/O are available. As ROOT is specialized to the HEP use case, it supports features missing from other formats.\\
+The ROOT container file format is ubiquitous in HEP, and comes with a serialization scheme tightly linked to the ROOT libraries. Industry and non-HEP tools typically use other formats (e.g. Apache Parquet~\cite{Parquet} for the ROOT TTree), and efforts are ongoing to enable their use. In addition the ROOT team foresees an evolution of the TTree to the more-optimized RNtuple. Multiple independent implementations of ROOT I/O are available. As ROOT is specialized to the HEP use case, it supports features missing from other formats.\\
 \textit{Recommendation.} The ROOT file format is extremely important for ongoing experiments and historical data and compatibility must be maintained. Other formats have important use-cases. Tools to translate between formats, and to enable various ecosystems to ingest and produce them, should be maintained.
 
 Software typically has low barriers to initial entry but significant ongoing maintenance requirements. New software projects are frequently initiated without much concern for long-term support (and this is reasonable since many bottom-up projects do not succeed).\\
-\textit{Recommendation.} Computing personnel should be funded specifically to maintain software projects identified as satisfying an important need in the community (for example, by the HEP Software Foundation). 
+\textit{Recommendation.} Computing personnel should be funded specifically to maintain software projects identified as satisfying an important need in the community (for example, by the HEP Software Foundation~\cite{HSF}). 
 
 
 \section{Analysis Models}
@@ -150,7 +165,7 @@ Analysis users value fast turn around --- being able to quickly answer physics q
 \subsection{Scale}
 Users need to be able to scale code execution from a few events (for testing) to an experiment's full dataset (for actual analysis). The former requires interactive response, while the latter may require distributed execution (on a single cluster or across multiple sites). Interactive use historically has occurred via terminal sessions and visualization software native to the particular operating system and environment. Distributed execution has occurred on batch systems, either single-site or multi-site; in the latter case, especially if a federated computing model is adopted, complex issues of data locality and access, bookkeeping, job brokering, fair access, and so on arise.
 
-Particle physics problems are usually \textit{high-throughput}, not \textit{high-performance}, problems: that is, they consist of a very large number of fairly lightweight computations which are essentially independent of each other, and so do not require computing resources to appear as a single, very powerful image (as on a traditional supercomputer). Traditional tightly-coupled supercomputer execution environments such as OpenMPI are therefore not typically needed for HEP analysis applications and in fact may be detrimental as they do not exploit the fine granularity of HEP problems. However, the increasing exploitation of coprocessors and accelerators (such as GPUs) in HEP code requires libraries that couple CPU and GPU execution on a single node.
+Particle physics problems are usually \textit{high-throughput}, not \textit{high-performance}, problems: that is, they consist of a very large number of fairly lightweight computations which are essentially independent of each other, and so do not require computing resources to appear as a single, very powerful image (as on a traditional supercomputer). Traditional tightly-coupled supercomputer execution environments such as OpenMPI~\cite{gabriel04:_open_mpi} are therefore not typically needed for HEP analysis applications and in fact may be detrimental as they do not exploit the fine granularity of HEP problems. However, the increasing exploitation of coprocessors and accelerators (such as GPUs) in HEP code requires libraries that couple CPU and GPU execution on a single node.
 
 Solutions that smoothly scale from small-scale interactive tests to full-data processing are desirable. In the absence of such solutions users face a barrier during the development of their analyses which can be quite substantial. Such solutions need to abstract away the execution of the event loop so that it can be executed on whatever resources are available, transparently to the user. Therefore by necessity they restrict the form of the user code to some extent. 
 
@@ -165,9 +180,10 @@ There is a recent trend towards using \textit{notebooks}, particularly those pro
 Users need to be able to scale their analyses from simple tests on a small debugging dataset to full deployment over all data. In many cases this transition requires working in a different environment (a common case is transitioning from a local workstation, referring to specific files, to a batch job running on a catalogued dataset). This can involve significant difficulties for users and cause support issues.\\
 \textit{Recommendation.} There is unlikely to be a one-size-fits-all solution for all experiments. Recent work with interactive analysis facilities which provide extreme scaling capabilities to users through a single interface may address many of these issues; if successful the resulting software stacks should be made available to small experiments in a turnkey way.
 
+
 \section{Dataset Bookkeeping and Formats - Amy}
 \begin{comment}
-S. V. Chekanov, G. Gavalian, and N. A. Graf, “Jas4pp - a Data-Analysis Framework for Physics and Detector Studies”, arXiv:2011.05329 [physics.comp-ph ]] (pdf).
+S. V. Chekanov, G. Gavalian, and N. A. Graf, “Jas4pp - a Data-Analysis Framework for Physics and Detector Studies”, arXiv:2011.05329 [physics.comp-ph ]] (pdf).~\cite{Chekanov:2020bja}
  - Java-based programs make distribution and installation on Windows, Linux, Mac easy
  - They mention excellent library support but it's not clear what libraries?
  - based on JAIDA, the Java implementation of AIDA (Abstract Interfaces for Data Analysis)
@@ -176,14 +192,14 @@ S. V. Chekanov, G. Gavalian, and N. A. Graf, “Jas4pp - a Data-Analysis Framewo
  - ProMC, ProIO
  - stores outputs with Java serialization method, can be binary format or XML 
  
-Jim Pivarski, Eduardo Rodrigues, Kevin Pedro, Oksana Shadura, Benjamin Krikler, Graeme A. Stewart. ”HL-LHC Computing Review Stage 2, Common Software Projects: Data Science Tools for Analysis”, arXiv:2202.02194 [physics.data-an] (pdf).
+Jim Pivarski, Eduardo Rodrigues, Kevin Pedro, Oksana Shadura, Benjamin Krikler, Graeme A. Stewart. ”HL-LHC Computing Review Stage 2, Common Software Projects: Data Science Tools for Analysis”, arXiv:2202.02194 [physics.data-an] (pdf).~\cite{arxiv.2202.02194}
 - physicists are motivated to contribute
 - interoperability is key to supporting scientists
 - ROOT is the columnar data store that will always be with us.  But ROOT files might some day contain more than TTrees, in particular RNTuple is under active development
 - Apache Arrow, Apache Parquet now offer similary-efficient columnar storage and tese format are used by some collaborations
 - Why not databases, this is an obvious match to our access problems!  See Striped, ServiceX, SkyhookDM, Coffea's columnservice, Tiled
 
-J. V. Bennett, J. Guilliams, M. Hernandez Villanueva, D. E. Jaffe, P. J. Laycock, A. Panta, C. Serfon, I. Ueda. ”Belle II grid-based user analysis”, arXiv:2203.07564 [hep-ex] (pdf).
+J. V. Bennett, J. Guilliams, M. Hernandez Villanueva, D. E. Jaffe, P. J. Laycock, A. Panta, C. Serfon, I. Ueda. ”Belle II grid-based user analysis”, arXiv:2203.07564 [hep-ex] (pdf).~\cite{Bennett:2022gyi}
 - ROOT files for storage and analysis
 - about 60 PB needed for all data (skimmed and simulation, not saving "original" data?)
 - collaboration feels that this is feasible storage-wise (although large) but that 10^12 events represents a data management challenge
@@ -194,7 +210,7 @@ J. V. Bennett, J. Guilliams, M. Hernandez Villanueva, D. E. Jaffe, P. J. Laycock
   -- software must remain usable (perhaps through containers)
   -- float the idea of central facilities that provide needed services to experiments
 
-Harrison B. Prosper, Sezen Sekmen, Gokhan Unel. ”Analysis Description Language: A DSL for HEP Analysis”, arXiv:2203.09886 [hep-ph] (pdf). (also relevant to CompF07)
+Harrison B. Prosper, Sezen Sekmen, Gokhan Unel. ”Analysis Description Language: A DSL for HEP Analysis”, arXiv:2203.09886 [hep-ph] (pdf). (also relevant to CompF07)~\cite{Prosper:2022lnf}
 - emphasizes the need for semantic analysis to make collaboration with theory easier
 - also makes an analysis self-documenting (Amy: to a degree)
 - prefers a language-independent DSL, an "external DSL" for easier interoperability
@@ -202,7 +218,7 @@ Harrison B. Prosper, Sezen Sekmen, Gokhan Unel. ”Analysis Description Language
 - people do use the Analysis Description Language (analysis schools, Future Circular Collider studies), not clear if the use is limited to a specific group or groups, no complete LHC analysis yet
 - Obvious enhancement of existing DSL would be to re-write to target LLVM.  (Amy: huh, okay, maybe it is time to think about DSLs?)
 
-C. Backhouse. ”The CAFAna framework for neutrino analysis”, arXiv:2203.13768 [hep-ex] (pdf). (also under NF01)
+C. Backhouse. ”The CAFAna framework for neutrino analysis”, arXiv:2203.13768 [hep-ex] (pdf). (also under NF01)~\cite{arxiv.2203.13768}
 - I feel like I need to re-read this paper (Amy)
 - ROOT format files
 - has been used by multiple neutrino experiments!
@@ -242,11 +258,11 @@ Experiments usually have global solutions for handling metadata involved in data
 
 \section{Collaborative Software - Gavin}
 \begin{comment}
-T. Aarrestad et al. [HEP Software Foundation], “HL-LHC Computing Review: Common Tools and Community Software”, arXiv:2008.13636 [physics.comp-ph ]] (pdf).
+T. Aarrestad et al. [HEP Software Foundation], “HL-LHC Computing Review: Common Tools and Community Software”, arXiv:2008.13636 [physics.comp-ph ]] (pdf).~\cite{10.5281/zenodo.4009114}
 
-Simone Campana, Alessandro Di Girolamo, Paul Laycock, Zach Marshall, Heidi Schellman, Graeme A Stewart. ”HEP computing collaborations for the challenges of the next decade”, arXiv:2203.07237 [physics.comp-ph] (pdf).
+Simone Campana, Alessandro Di Girolamo, Paul Laycock, Zach Marshall, Heidi Schellman, Graeme A Stewart. ”HEP computing collaborations for the challenges of the next decade”, arXiv:2203.07237 [physics.comp-ph] (pdf).~\cite{arxiv.2203.07237}
 
-Dave Casper, Maria Elena Monzani, Benjamin Nachman, Costas Andreopoulos, Stephen Bailey, Deborah Bard, et al. ”Software and Computing for Small HEP Experiments“, arXiv:2203.07645 [hep-ex] (pdf). (also under EF0, NF0, RF0, CF0)
+Dave Casper, Maria Elena Monzani, Benjamin Nachman, Costas Andreopoulos, Stephen Bailey, Deborah Bard, et al. ”Software and Computing for Small HEP Experiments“, arXiv:2203.07645 [hep-ex] (pdf). (also under EF0, NF0, RF0, CF0)~\cite{arxiv.2203.07645}
 
 \end{comment}
 
@@ -256,32 +272,34 @@ The size and available expertise of an experiment may dictate what tools can be 
 \subsection{Tools for Collaboration}
 
 \begin{itemize} 
-  \item Code Management and Version Control
+  \item Code Management and Version Control\\
 In terms of code management and version control, many people love git. Equally many feel that more git training is needed. However, some experiments also support subversion and CVS (the Concurrent Versioning System), in some cases for legacy code, and so expertise and exposure is still necessitated
-within experiments for these additional alternatives. Effort should be made to establish the use of a version control platform at the early stage of a user's research career. 
-  \item Communication
-In order to stay informed and in contact with collaborators all users use some form of instant messaging platform for both synchronous and asynchronous communication. Video and voice conferencing is dominated by the uptake of Zoom but other formats exsit and are still used, such as Skype, Vidyo). Email and phone communication are fast being overtaken as the primary method of communication by several platforms that offer IRC-style 
-features, persistent channels (or chat 'rooms') organized by topic, private groups, and simple person-to-person direct messaging. Examples of such messaging programs include Slack, Zulip, Mattermost, Discord, Discource. 
-DO these platforms meet our needs? Should we seek better integration? Many offer integration with various communication tools to be able to switch between (for example, Slack integration with GitHub, Zoom, Google tools) but often at a premium, per-user cost basis (ablbeit with education/research based cost reduction). Indeed programs such as Zulip are open-source and afford 
-more control and zero financial burden at the cost of humanpower and resources to maintain them within a collaboration.
+within experiments for these additional alternatives. Effort should be made to establish the use of a version control platform at the early stage of a user's research career. It is especially important to note that version control is the basis for many important workflows, including:
+       \subitem testing via continuous integration for reproducibility and quality control
+       \subitem automated packaging and installation
+       \subitem open review and transparency
+       \subitem documentation of software changes and issue tracking       
+  \item Communication\\
+In order to stay informed and in contact with collaborators all users use some form of instant messaging platform for both synchronous and asynchronous communication. Video and voice conferencing is dominated by the uptake of Zoom but other formats exsit and are still used, such as Skype, Vidyo). Email and phone communication are fast being overtaken as the primary method of communication by several platforms that offer IRC-style features, persistent channels (or chat 'rooms') organized by topic, private groups, and simple person-to-person direct messaging. Examples of such messaging programs include Slack, Zulip, Mattermost, Discord, Discourse. 
+Do these platforms meet our needs? Should we seek better integration? Many offer integration with various communication tools to be able to switch between (for example, Slack integration with GitHub, Zoom, Google tools) but often at a premium, per-user cost basis (albeit with education/research based cost reduction). Indeed programs such as Zulip are open-source and afford more control and zero financial burden at the cost of humanpower and resources to maintain them within a collaboration.
 Should we try to standardize across HEP?
 Should we prefer centralized (e.g. lab-hosted) or decentralized (user-controlled) models?
-  \item Software distribution
-Spack, UPS/UPD. What do the large experiments use?
-CVMFS.
+  \item Software distribution\\
+Spack, conda, pip, UPS/UPD, CVMFS.
 Containers are an important part of job submission.
 Some pieces of software are so platform dependent that it's sometimes nearly impossible to replicate the framework on another machine.
 
-  \item Project Management
-Fewer users empoy bug-tracking or project management tools. 
-Some users use programs such as Trello or Notion for project management or simple Google Docs/Sheets
-  \item Documentation
+  \item Project Management\\
+Fewer users employ bug-tracking or project management tools. 
+Some users use programs such as Trello or Notion for project management or simple Google Docs/Sheets. There is some migration from Redmine Issue tracking to more modern GitHub Issues.
+  \item Documentation\\
 Wikis, Doxygen. Did anyone teach you how to document your code?
 
 
 \end{itemize}
 
 Discuss Zenodo /Arxiv here? They refer more to data preservation but are collaborative tools.
+
 \subsection{Accessibility issues}
 Overlaps with training \& documentation.
 How much of “how to do things” lives in private or hard-to-search channels?
@@ -312,8 +330,8 @@ We do not have the expertise we need for the computational work of upcoming phys
 Question: where can this work come from?
 
 \begin{itemize}
-\item Collaborations with industry are rare (are they, though, for GPU work?).  
-\item Collaborations with computer scientists are tougher than they appear.  Computer Scientists have a higher pay scale.  Also, much of our work is not interesting from a computer science perspective.
+\item Collaborations with industry are rare (are they, though, for GPU work?).  Although successful collaborations do exist such as the highly beneficial engagement of NVIDIA with domain scientists for over a decade. 
+\item Collaborations with computer scientists are tougher than they appear.  Computer Scientists have a higher pay scale.  Also, much of our work is not interesting from a computer science perspective. It is crucial that we formulate our domain's problems (in the form of compute, productivity, and I/O challenges for example) often and in great detail to computer scientists. We need to make an effort to find the underlying challenges so that together we can address R\&D challenges in diverse teams. 
 \item We can grow our own.  There are serious barriers to this.  (1) Curriculum change - or at least asking students to double major - is a big ask.  (2) Stable career paths don't currently exist.  Research software engineers are often supported on soft money and computing work is not typically valued in the promotion or tenure process.
 \end{itemize}
 
