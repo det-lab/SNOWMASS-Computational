@@ -80,7 +80,7 @@ No analysis software functions entirely on its own; any package is situated in t
 Packages in an ecosystem typically have common data interchange formats and similar programming language interfaces. In some cases they may be distributed together as a single metapackage with overall versioning. There are two major ecosystems in HEP:
 \begin{itemize}
     \item \textbf{ROOT} \cite{Brun:1997pa}: the ROOT suite is a tightly-integrated set of libraries that cover a broad range of HEP analysis needs, including I/O, event loop execution (including a parallel distributed mode), histogramming, fitting and statistical analysis, and visualization. The libraries are written in C++ and that is still considered the primary language for its use, although the Python bindings (PyROOT) are very well supported and by construction expose essentially the full API.  Bindings for the R language are also currently supported. The ROOT libraries were developed to meet the specific needs of HEP experiments and as such provide solutions that are well-matched to HEP analysis problems, although this also means that use outside of HEP is limited. The integrated, tightly-bound nature of ROOT means that using alternative software for any particular functionality can be difficult. ROOT is undergoing a redesign \cite{Naumann:2022pub} (``ROOT 7'') which aims to improve interfaces with the benefit of modern C++ and the benefit of over 25 years of practical experience. ROOT is hosted by CERN with significant contributions from US partners, particularly in the area of I/O.
-    \item \textbf{Python} \cite{van1995python,10.5555/1593511}: this is a somewhat loose term for a set of tools, with Python as the primary language interface, introduced with the primary goal of enabling the use of software developed outside of HEP, in particular for machine learning. Many core packages in this ecosystem are part of the Scikit-HEP \cite{Rodrigues:2020syo} and IRIS-HEP \cite{IRISHEPWEB} projects. This ecosystem is still in development and has no single governance team; the IRIS-HEP and HEP Software Foundation have invested heavilty in python libraries \cite{Pivarski:2022ycs,}. It tends to emphasize independent packages for different aspects of the analysis pipeline (so, for example, I/O is handled with a different package from histogramming). Due to a standard and extensive set of tools aimed at supporting development of open source Python packages (the pypi package repository, github actions for continuous integration, documentation hosting on readthedocs) the barriers to entry for new software in this ecosystem are quite low. Development teams in this ecosystem are typically small and feature junior personnel.
+    \item \textbf{Python} \cite{van1995python,10.5555/1593511}: this is a somewhat loose term for a set of tools, with Python as the primary language interface, introduced with the primary goal of enabling the use of software developed outside of HEP, in particular for machine learning. Many core packages in this ecosystem are part of the Scikit-HEP~\cite{Rodrigues:2020syo} and the Institute for Reasearch and Innovation in Software in HEP (IRIS-HEP)~\cite{IRISHEPWEB} projects. This ecosystem is still in development and has no single governance team; the IRIS-HEP and HEP Software Foundation have invested heavilty in python libraries \cite{Pivarski:2022ycs,}. It tends to emphasize independent packages for different aspects of the analysis pipeline (so, for example, I/O is handled with a different package from histogramming). Due to a standard and extensive set of tools aimed at supporting development of open source Python packages (the pypi package repository, github actions for continuous integration, documentation hosting on readthedocs) the barriers to entry for new software in this ecosystem are quite low. Development teams in this ecosystem are typically small and feature junior personnel.
 \end{itemize}
 
 The long history of ROOT in HEP means that similar featuresets have sometimes been developed more than once, in incompatible fashions. For example, parallel processing of events on a single node was supported by PROOF Lite, the implicit multithreading feature for executing queries on TTrees, and RDataFrame. In the Python ecosystem a similar situation arises due to simultaneous development and shorter development cycles.
@@ -261,7 +261,7 @@ Experiments usually have global solutions for handling metadata involved in data
 
 \section{Collaborative Software}
 \begin{comment}
-T. Aarrestad et al. [HEP Software Foundation], “HL-LHC Computing Review: Common Tools and Community Software”, arXiv:2008.13636 [physics.comp-ph ]] (pdf).~\cite{10.5281/zenodo.4009114}
+T. Aarrestad et al. [HEP Software Foundation], “HL-LHC Computing Review: Common Tools and Community Software”, arXiv:2008.13636 [physics.comp-ph ]] (pdf).~\cite{stewart_graeme_andrew_2020_4009114}
 
 Simone Campana, Alessandro Di Girolamo, Paul Laycock, Zach Marshall, Heidi Schellman, Graeme A Stewart. ”HEP computing collaborations for the challenges of the next decade”, arXiv:2203.07237 [physics.comp-ph] (pdf).~\cite{arxiv.2203.07237}
 
@@ -270,13 +270,13 @@ Dave Casper, Maria Elena Monzani, Benjamin Nachman, Costas Andreopoulos, Stephen
 \end{comment}
 
 At its heart, HEP research is collaborative in nature and as the complexity of the physics problems increases this necessitates the need to effectively and efficiently communicate and collaborate with peers.
-The size and available expertise of an experiment may dictate what tools can be employed. When talking about collaborative software one is considering code management, version control, communication software, forums, wikis, Q\&A platforms.
+The size and available expertise of an experiment may dictate what tools can be employed. When talking about collaborative software one is considering code management and distribution, version control, communication software, forums, wikis, and Q\&A platforms.
 %Reference the community survey
 \subsection{Tools for Collaboration}
 
 \begin{itemize} 
   \item Code Management and Version Control\\
-In terms of code management and version control, many people love git. Equally many feel that more git training is needed. However, some experiments also support subversion and CVS (the Concurrent Versioning System), in some cases for legacy code, and so expertise and exposure is still necessitated
+In terms of code management and version control, many people love git~\cite{chacon2014pro}. Equally many feel that more git training is needed. However, some experiments also support subversion~\cite{subversion} and CVS (the Concurrent Versioning System), in some cases for legacy code, and so expertise and exposure is still necessitated
 within experiments for these additional alternatives. Effort should be made to establish the use of a version control platform at the early stage of a user's research career. It is especially important to note that version control is the basis for many important workflows, including:
        \subitem testing via continuous integration for reproducibility and quality control
        \subitem automated packaging and installation
@@ -284,24 +284,26 @@ within experiments for these additional alternatives. Effort should be made to e
        \subitem documentation of software changes and issue tracking       
   \item Communication\\
 In order to stay informed and in contact with collaborators all users use some form of instant messaging platform for both synchronous and asynchronous communication. Video and voice conferencing is dominated by the uptake of Zoom but other formats exsit and are still used, such as Skype, Vidyo. Email and phone communication are fast being overtaken as the primary method of communication by several platforms that offer IRC-style features, persistent channels (or chat 'rooms') organized by topic, private groups, and simple person-to-person direct messaging. Examples of such messaging programs include Slack, Zulip, Mattermost, Discord, Discourse. 
-Do these platforms meet our needs? Should we seek better integration? Many offer integration with various communication tools to be able to switch between (for example, Slack integration with GitHub, Zoom, Google tools) but often at a premium, per-user cost basis (albeit with education/research based cost reduction). Indeed programs such as Zulip are open-source and afford more control and zero financial burden at the cost of humanpower and resources to maintain them within a collaboration.
+Many of these offerings provide integration with various communication tools to be able to seamlessly switch between them (for example, Slack integration with GitHub, Zoom, and Google tools) but often at a premium, per-user cost basis (albeit with education/research based cost reduction). Indeed programs such as Zulip are open-source and afford more control and zero financial burden at the cost of humanpower and resources to maintain them within a collaboration.
 Should we try to standardize across HEP?
 Should we prefer centralized (e.g. lab-hosted) or decentralized (user-controlled) models?
   \item Software distribution\\
-Spack, conda, pip, UPS/UPD, CVMFS.
+Once software is built, mechanisms are needed to deliver the software to end users. The advent of the CernVM-File System (CernVM-FS) has greatly enhanced software distribution throughout the HEP field providing a scalable, reliable and low maintenance service~\cite{stewart_graeme_andrew_2020_4009114,Blomer:2011zz,7310920}. The long-term maintenance and development of this important infrastructure needs to be accepted as new challenges arise, notably scaling issues. \\
+External software products are managed and installed on file distribution services (i.e. CernVM-FS) through various different mechanisms. An example, for Fermilab-based experiments in particular, is access to external
+products provided by a Fermilab-developed product-management package called Unix Product
+Support (UPS), for selecting particular build flavors, and Unix Product Distribution (UPD) for uploading/downloading of products between local systems and distributions servers. Alternatives emerging and being adopted within HEP include open source package managers Spack~\cite{7832814}, Anaconda's conda~\cite{anaconda} and the package installer for Python, pip~\cite{pypi}. All of these options still require the necessary humanpower and expertise to deploy and maintain. 
+
 Containers are an important part of job submission.
 Some pieces of software are so platform dependent that it's sometimes nearly impossible to replicate the framework on another machine.
 
   \item Project Management\\
 Fewer users employ bug-tracking or project management tools. 
-Some users use programs such as Trello or Notion for project management or simple Google Docs/Sheets. There is some migration from Redmine Issue tracking to more modern GitHub Issues.
+Some users use commercial programs such as Trello or Notion for project management or simple Google Docs/Sheets. There is some migration from Redmine Issue tracking to more modern GitHub Issues.
   \item Documentation\\
 Wikis, Doxygen. Did anyone teach you how to document your code?
-
+  zenodo, bitex (arxiv), inspire-hep
 
 \end{itemize}
-
-Discuss Zenodo /Arxiv here? They refer more to data preservation but are collaborative tools.
 
 \subsection{Accessibility issues}
 Overlaps with training \& documentation.
