@@ -49,7 +49,7 @@ They don't have funding cycles? \cite{Naumann:2022pub}
 
 \paragraph{XSEDE ACCESS ECSS/SGCI}
 
-The SGCI funding model is based on the XSEDE ECSS program.   
+The SGCI funding model is based on the XSEDE ECSS program.
 
 \paragraph{CTEQ}
 
@@ -74,7 +74,7 @@ A lot of transformative ideas are introduced to the HEP computing community and 
 % \end{table}
 % Let CompF4 handle this?
 
-\section{Analysis Ecosystems: Libraries, Languages, and Data Formats - Peter}
+\section{Analysis Ecosystems: Libraries, Languages, and Data Formats}
 No analysis software functions entirely on its own; any package is situated in the context of the input data it consumes, the output data it produces, the other software it depends on, and the way it is configured or embedded in other code. Because of this we talk about ``software ecosystems,'' groups of packages which are typically used together.
 
 Packages in an ecosystem typically have common data interchange formats and similar programming language interfaces. In some cases they may be distributed together as a single metapackage with overall versioning. There are two major ecosystems in HEP:
@@ -119,6 +119,9 @@ Analysis data come in many forms:
 File formats can describe both the overall container for data and the specific types of objects that can be stored. ROOT separates these fairly strictly, in that the ROOT file format can store essentially any C++ object, and ROOT objects can be serialized to formats other than ROOT files (such as JSON or XML). ROOT provides a number of pre-defined data objects, such as tables (known as TTrees) and histograms, and multiple objects can be present in the same file. Other data formats allow less freedom; for example, Apache Parquet merges the container and the data object and is only suitable for tabular data, while HDF5 files allow for a specific set of contained structures.
 
 It is important to note that analysis end-users very rarely interact directly with underlying file formats --- they work with in the in-memory transient representation of data, rather than the persistent format, and the translation between the two is handled by libraries. The capabilities of specific formats may limit what users can do, and certain formats may provide more optimized storage, but otherwise the details are generally hidden from users. Therefore transitions in data format are easier to handle than those in libraries or languages. Newer versions of ROOT include the capability to read in data in CSV text format, sqlite files, or Apache Arrow~\cite{Arrow}.
+
+% GD, from DE comments. need to expand.
+RNTuple, column-wise data formatting for faster, easier access -- connect with challenges of analyzing huge data samples for end users' timely production of conference results and physics papers. These new formats, interfaces (evolution of TTree) and analysis frameworks (Coffea, CAFAna) is to deliver a reasonable turnaround and user friendliness so that running and re-running on analysis level ntuples does not become an unsurmountable bottleneck. [any quantitative statements?]
 
 \subsection{Visualization}
 
@@ -181,7 +184,7 @@ Users need to be able to scale their analyses from simple tests on a small debug
 \textit{Recommendation.} There is unlikely to be a one-size-fits-all solution for all experiments. Recent work with interactive analysis facilities which provide extreme scaling capabilities to users through a single interface may address many of these issues; if successful the resulting software stacks should be made available to small experiments in a turnkey way.
 
 
-\section{Dataset Bookkeeping and Formats - Amy, Peter is working on bookkeeping local user outputs}
+\section{Dataset Bookkeeping and Formats}
 \begin{comment}
 S. V. Chekanov, G. Gavalian, and N. A. Graf, “Jas4pp - a Data-Analysis Framework for Physics and Detector Studies”, arXiv:2011.05329 [physics.comp-ph ]] (pdf).~\cite{Chekanov:2020bja}
  - Java-based programs make distribution and installation on Windows, Linux, Mac easy
@@ -256,7 +259,7 @@ Standalone files that are considered opaque to data-handling and cataloging soft
 Experiments usually have global solutions for handling metadata involved in dataset cataloging and workflow control. However these solutions frequently are not available for individual analyses and users may need to develop bespoke solutions.\\
 \textit{Recommendation.} Effort should be put into developing user-friendly data provenance and metadata storage systems that can be easily integrated into typical analysis tasks.
 
-\section{Collaborative Software - Gavin}
+\section{Collaborative Software}
 \begin{comment}
 T. Aarrestad et al. [HEP Software Foundation], “HL-LHC Computing Review: Common Tools and Community Software”, arXiv:2008.13636 [physics.comp-ph ]] (pdf).~\cite{10.5281/zenodo.4009114}
 
@@ -280,7 +283,7 @@ within experiments for these additional alternatives. Effort should be made to e
        \subitem open review and transparency
        \subitem documentation of software changes and issue tracking       
   \item Communication\\
-In order to stay informed and in contact with collaborators all users use some form of instant messaging platform for both synchronous and asynchronous communication. Video and voice conferencing is dominated by the uptake of Zoom but other formats exsit and are still used, such as Skype, Vidyo). Email and phone communication are fast being overtaken as the primary method of communication by several platforms that offer IRC-style features, persistent channels (or chat 'rooms') organized by topic, private groups, and simple person-to-person direct messaging. Examples of such messaging programs include Slack, Zulip, Mattermost, Discord, Discourse. 
+In order to stay informed and in contact with collaborators all users use some form of instant messaging platform for both synchronous and asynchronous communication. Video and voice conferencing is dominated by the uptake of Zoom but other formats exsit and are still used, such as Skype, Vidyo. Email and phone communication are fast being overtaken as the primary method of communication by several platforms that offer IRC-style features, persistent channels (or chat 'rooms') organized by topic, private groups, and simple person-to-person direct messaging. Examples of such messaging programs include Slack, Zulip, Mattermost, Discord, Discourse. 
 Do these platforms meet our needs? Should we seek better integration? Many offer integration with various communication tools to be able to switch between (for example, Slack integration with GitHub, Zoom, Google tools) but often at a premium, per-user cost basis (albeit with education/research based cost reduction). Indeed programs such as Zulip are open-source and afford more control and zero financial burden at the cost of humanpower and resources to maintain them within a collaboration.
 Should we try to standardize across HEP?
 Should we prefer centralized (e.g. lab-hosted) or decentralized (user-controlled) models?
@@ -320,14 +323,22 @@ Some people feel that more git training is needed
 Should this include a discussion on software citations, such as via Zenodo or such?
 
 \subsection{Findings and Recommendations}
-The “full” analysis stack of an experiment also includes software that enables interaction between analyzers. This includes documentation of the experiment’s code, messaging between users, discussion forums, software version control, bug tracking, and document workflow management. Especially for small experiments, setting up this infrastructure from scratch can be daunting both in effort and cost.\\
+The “full” analysis stack of an experiment also includes software that enables interaction between analyzers. This includes documentation of the experiment's code, messaging between users, discussion forums, software version control, bug tracking, and document workflow management. Especially for small experiments, setting up this infrastructure from scratch can be daunting both in effort and cost.\\
 \textit{Recommendation.} Access to a full stack of these services should be provided to funded experiments.  XSEDE/ACES could also play an important role here as some laboratories have onerous access requirements.
 
-\section{Training - Amy}
+\section{Training}
 
 We do not have the expertise we need for the computational work of upcoming physics.
 
-Question: where can this work come from?
+Sustainable efforts in HEP computation require continual recruitment and training of  the HEP workforce. The HEP experimental community has realized the importance of training and tries to meet this need through experiment-specific training and, increasingly, through the use of common training materials and training instruction, notably The Carpentries project~\cite{Carpentries} and HEP specific produced by the HEP Software Foundation~\cite{Malik_2021}.
+
+Training needs to range from on-boarding of novice summer students to perform a simple python coding task, through experimental training weeks for graduate students and postdocs, to high-level training of domain experts in specialized subjects and training for the trainers themselves. Practitioners vary from people running prepackaged analysis code on well defined data samples to experts writing machine learning algorithms for field-programmable gate arrays (FPGAs) or designing multi-national workflows for the WLCG.  
+
+A well trained HEP computing workforce has enormous payoffs, by avoiding wasted effort and resources, by optimizing the quality and reproducibility of physics results, by providing our colleagues with marketable skills, and sharing advanced expertise in computing with the institutions we work for.  In addition to their research, HEP faculty (and our astrophysics colleagues)  are often the driving force behind the introduction of  modern computing into the undergraduate Physics curriculum and thus have influence far beyond our field.  
+
+In the past, such common training efforts have suffered from the  tight connection between research funding and specific experiments, which discouraged cross-experimental efforts. US funding agencies are now making substantial efforts in support of common computing efforts, including training and documentation, notably through the NSF funded IRIS-HEP program and DOE's recent call for graduate training grants proposals. These efforts, in collaboration with colleagues worldwide, should be encouraged and extended.
+
+Question: where can this expertise come from?
 
 \begin{itemize}
 \item Collaborations with industry are rare (are they, though, for GPU work?).  Although successful collaborations do exist such as the highly beneficial engagement of NVIDIA with domain scientists for over a decade. 
