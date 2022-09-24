@@ -45,11 +45,11 @@ Analysis activities include, but are not limited to:
 The PDG is recognized as important despite not being innovative.  We all expect the PDG to be there.
 
 \paragraph{ROOT}
-They don't have funding cycles?
+They don't have funding cycles? \cite{Naumann:2022pub}
 
-\paragraph{XSEDE ACCESS}
+\paragraph{XSEDE ACCESS ECSS/SGCI}
 
-\paragraph{SGCI}
+The SGCI funding model is based on the XSEDE ECSS program.   
 
 \paragraph{CTEQ}
 
@@ -80,7 +80,7 @@ No analysis software functions entirely on its own; any package is situated in t
 Packages in an ecosystem typically have common data interchange formats and similar programming language interfaces. In some cases they may be distributed together as a single metapackage with overall versioning. There are two major ecosystems in HEP:
 \begin{itemize}
     \item \textbf{ROOT} \cite{Brun:1997pa}: the ROOT suite is a tightly-integrated set of libraries that cover a broad range of HEP analysis needs, including I/O, event loop execution (including a parallel distributed mode), histogramming, fitting and statistical analysis, and visualization. The libraries are written in C++ and that is still considered the primary language for its use, although the Python bindings (PyROOT) are very well supported and by construction expose essentially the full API.  Bindings for the R language are also currently supported. The ROOT libraries were developed to meet the specific needs of HEP experiments and as such provide solutions that are well-matched to HEP analysis problems, although this also means that use outside of HEP is limited. The integrated, tightly-bound nature of ROOT means that using alternative software for any particular functionality can be difficult. ROOT is undergoing a redesign \cite{Naumann:2022pub} (``ROOT 7'') which aims to improve interfaces with the benefit of modern C++ and the benefit of over 25 years of practical experience. ROOT is hosted by CERN with significant contributions from US partners, particularly in the area of I/O.
-    \item \textbf{Python} \cite{van1995python,10.5555/1593511}: this is a somewhat loose term for a set of tools, with Python as the primary language interface, introduced with the primary goal of enabling the use of software developed outside of HEP, in particular for machine learning. Many core packages in this ecosystem are part of the Scikit-HEP \cite{Rodrigues:2020syo} and IRIS-HEP \cite{IRISHEPWEB} projects. This ecosystem is still in development and has no single governance team. It tends to emphasize independent packages for different aspects of the analysis pipeline (so, for example, I/O is handled with a different package from histogramming). Due to a standard and extensive set of tools aimed at supporting development of open source Python packages (the pypi package repository, github actions for continuous integration, documentation hosting on readthedocs) the barriers to entry for new software in this ecosystem are quite low. Development teams in this ecosystem are typically small and feature junior personnel.
+    \item \textbf{Python} \cite{van1995python,10.5555/1593511}: this is a somewhat loose term for a set of tools, with Python as the primary language interface, introduced with the primary goal of enabling the use of software developed outside of HEP, in particular for machine learning. Many core packages in this ecosystem are part of the Scikit-HEP \cite{Rodrigues:2020syo} and IRIS-HEP \cite{IRISHEPWEB} projects. This ecosystem is still in development and has no single governance team; the IRIS-HEP and HEP Software Foundation have invested heavilty in python libraries \cite{Pivarski:2022ycs,}. It tends to emphasize independent packages for different aspects of the analysis pipeline (so, for example, I/O is handled with a different package from histogramming). Due to a standard and extensive set of tools aimed at supporting development of open source Python packages (the pypi package repository, github actions for continuous integration, documentation hosting on readthedocs) the barriers to entry for new software in this ecosystem are quite low. Development teams in this ecosystem are typically small and feature junior personnel.
 \end{itemize}
 
 The long history of ROOT in HEP means that similar featuresets have sometimes been developed more than once, in incompatible fashions. For example, parallel processing of events on a single node was supported by PROOF Lite, the implicit multithreading feature for executing queries on TTrees, and RDataFrame. In the Python ecosystem a similar situation arises due to simultaneous development and shorter development cycles.
@@ -181,7 +181,7 @@ Users need to be able to scale their analyses from simple tests on a small debug
 \textit{Recommendation.} There is unlikely to be a one-size-fits-all solution for all experiments. Recent work with interactive analysis facilities which provide extreme scaling capabilities to users through a single interface may address many of these issues; if successful the resulting software stacks should be made available to small experiments in a turnkey way.
 
 
-\section{Dataset Bookkeeping and Formats - Amy}
+\section{Dataset Bookkeeping and Formats - Amy, Peter is working on bookkeeping local user outputs}
 \begin{comment}
 S. V. Chekanov, G. Gavalian, and N. A. Graf, “Jas4pp - a Data-Analysis Framework for Physics and Detector Studies”, arXiv:2011.05329 [physics.comp-ph ]] (pdf).~\cite{Chekanov:2020bja}
  - Java-based programs make distribution and installation on Windows, Linux, Mac easy
