@@ -291,44 +291,30 @@ Should we prefer centralized (e.g. lab-hosted) or decentralized (user-controlled
 Once software is built, mechanisms are needed to deliver the software to end users. The advent of the CernVM-File System (CernVM-FS) has greatly enhanced software distribution throughout the HEP field providing a scalable, reliable and low maintenance service~\cite{stewart_graeme_andrew_2020_4009114,Blomer:2011zz,7310920}. The long-term maintenance and development of this important infrastructure needs to be accepted as new challenges arise, notably scaling issues. \\
 External software products are managed and installed on file distribution services (i.e. CernVM-FS) through various different mechanisms. An example, for Fermilab-based experiments in particular, is access to external
 products provided by a Fermilab-developed product-management package called Unix Product
-Support (UPS), for selecting particular build flavors, and Unix Product Distribution (UPD) for uploading/downloading of products between local systems and distributions servers. Alternatives emerging and being adopted within HEP include open source package managers Spack~\cite{7832814}, Anaconda's conda~\cite{anaconda} and the package installer for Python, pip~\cite{pypi}. All of these options still require the necessary humanpower and expertise to deploy and maintain. 
+Support (UPS), for selecting particular build flavors, and Unix Product Distribution (UPD) for uploading/downloading of products between local systems and distributions servers. Alternatives emerging and being adopted within HEP include (but not limited to) open source package managers Spack~\cite{7832814}, Anaconda's conda~\cite{anaconda}, and the package installer for Python, pip~\cite{pypi}. All of these options still require the necessary humanpower and expertise to deploy and maintain. 
+The proliferation of different packaging options is not a new problem and was studied in detail within a HEP Software Foundation Packaging Working group report~\cite{l_sexton_kennedy_2016_1472340}. Such fruitful, frequent discussions and summaries are critical in order to keep abreast of recent developments, understand common problems with the aim of converging on common solutions. 
 
-Containers are an important part of job submission.
-Some pieces of software are so platform dependent that it's sometimes nearly impossible to replicate the framework on another machine.
-
+Containers are now also commonplace components for job submission. Some pieces of software are so platform dependent that it's sometimes nearly impossible to replicate the framework on another machine ,thus containers are a popular way to deploy applications but they do also come with some disadvantages, such as whilst they are a good tool for job submission, graphical applications do not work well, persistent storage is complicated,...for example. It is also another tool that users must be familiar with in their workflow and should have appropriate documentation and training materials.
   \item Project Management\\
-Fewer users employ bug-tracking or project management tools. 
-Some users use commercial programs such as Trello or Notion for project management or simple Google Docs/Sheets. There is some migration from Redmine Issue tracking to more modern GitHub Issues.
+Fewer users employ bug-tracking or project management tools. Some users use commercial programs such as Trello or Notion for project management on the individual level (far too expensive for large experiments) or simple, free Google Docs/Sheets. There is some migration to using GitHub Issues.
   \item Documentation\\
-Wikis, Doxygen. Did anyone teach you how to document your code?
-  zenodo, bitex (arxiv), inspire-hep
+Any given experiment may have found the a good solution for distributing software, or the right tool to facilitate communication amongst users but without appropriate attention to documentation this can lead to communication gaps, uninformed decisions, lack of transparency, wasted time, inefficient onboarding of new users, and an increased knowledge gap between experts and users.  Good documentation tools and practices can alleviate some of the pain of knowledge transfer, in the case of experts retiring or moving on to new projects/fields and new users joining. In practice a number of different tools are employed to encourage documentation: technical notes, wikis, Doxygen, Sphinx, GitHub wiki/issue tracking to name a few. Even with the right tool in place, the encouragement and incentive needs to be in place to provide said documentation and keep it up to date. This also couples with the training discussion in Sec.~\ref{sec:training}.
 
 \end{itemize}
 
-\subsection{Accessibility issues}
-Overlaps with training \& documentation.
-How much of “how to do things” lives in private or hard-to-search channels?
+\subsection{Accessibility}
+The question of accessibility for end users overlaps with training \& documentation. It is difficult to quantify how much of “how to do things” lives in private or hard-to-search communication forums/channels
 How much do these tools enable “chatting with colleagues” and can we improve that?
 
 
 Experiment analysis software \& environments should be encouraged to guide people towards constructing reproducible and archivable analyses from the start.
-Incentives are needed for supporting existing code vs. re-inventing the wheel when unnecessary.
-
-\begin{comment}
-Tools for collaboration
-git
-Many people love git
-Some people feel that more git training is needed
-\end{comment}
-
-
-Should this include a discussion on software citations, such as via Zenodo or such?
+Incentives are needed for supporting existing code versus re-inventing the wheel when unnecessary.
 
 \subsection{Findings and Recommendations}
 The “full” analysis stack of an experiment also includes software that enables interaction between analyzers. This includes documentation of the experiment's code, messaging between users, discussion forums, software version control, bug tracking, and document workflow management. Especially for small experiments, setting up this infrastructure from scratch can be daunting both in effort and cost.\\
 \textit{Recommendation.} Access to a full stack of these services should be provided to funded experiments.  XSEDE/ACES could also play an important role here as some laboratories have onerous access requirements.
 
-\section{Training}
+\section{Training}\label{sec:training}
 
 We do not have the expertise we need for the computational work of upcoming physics.  The question our community must address is: where can this expertise come from?
 
