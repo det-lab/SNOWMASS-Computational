@@ -37,7 +37,7 @@ A choice of software stacks is becoming available for HEP analysis. It is genera
 In order for the ecosystems to achieve long-term, sustainable success, we note the following requirements:
 \begin{itemize}
     \item \textbf{Support of Personnel.} Unsupported software projects undergo ``code rot'' over time, a process where changes external to the package itself cause it to lose functionality. In the Python ecosystem, for example, the migration from Python 2 to Python 3 rendered old versions of packages unusable. For this reason alone, it is mandatory that any software that forms a key part of a HEP analysis ecosystem must have a maintainer who is able to provide the necessary level of support for the package. 
-    \item \textbf{Maintenance Support} The community must understand that maintenance is a task of equivalent importance to developing new code, and recognize people's work appropriately. There must also be a mechanism for transferring responsibility for a package as necessary.
+    \item \textbf{Maintenance Support} The community must understand that maintenance is a task of equivalent importance to developing new code, and recognize people's work appropriately. There must also be a mechanism for transferring responsibility for a package as necessary.   
     \item \textbf{Documentation and Training.} Analysis software ecosystems are used as a gestalt --- not as a disconnected set of packages. 
     \item \textbf{Interoperability.} Ecosystem lock-in can be a problem for multiple reasons. Packages that can only be used in a single ecosystem will not provide benefits to users not in that ecosystem. Interoperability is critical for innovation that has broad impact.
 \end{itemize}
@@ -204,20 +204,20 @@ C. Backhouse. ”The CAFAna framework for neutrino analysis”, arXiv:2203.13768
 - connected with STAN to provide MCMC + analytic derivatives
 \end{comment}
 
-Data in the Computational Frontier falls into four categories, and each has an array of associated formats.  ROOT files are inescapable and present in virtually every type of analysis, although there are other formats in use:   
+Data in the Computational Frontier falls into four categories, and each has an array of associated formats.  ROOT files are inescapable and present in virtually every type of analysis, although there are other formats in use, often to support efforts like machine-learning where libraries outside the ROOT ecosystem have developed rapidly:   
 
 \begin{itemize}
-  \item Raw data: overwhelmingly, custom binary formats that are specific to an experminent
-  \item Processed and/or skimmed data: ROOT, always and forever, and we all know it
-  \item Intermediate files that facilitate tool use: Parquet, Zarr, etc.  HDF5 is rarely used, its libraries are a bit painful and all the tools people want to use work with file formats that have friendlier IO libraries
+  \item Raw data: overwhelmingly, custom binary formats that are specific to an experminent.  Interest in accessing these files to explore new reconstruction methods is growing.
+  \item Processed and/or skimmed data: predominantly ROOT.
+  \item Intermediate files that facilitate tool use: Parquet, Zarr, etc.  HDF5 is rarely used, its libraries are a bit painful and all the tools people want to use work with file formats that have friendlier IO libraries.
   \item Metadata (file metadata, run information, processing states): Databases, stand-alone text files, wikis.  Metadata is also often included in the data file.
 \end{itemize}
 
 The challenges we face that are directly related to file formats are
 
 \begin{itemize}
-  \item Preservation.  Reproducibility, training, open science, and principles of Findable, Accesible, Interoperable, and Reusable (FAIR)~\cite{Wilkinson2016} are increasingly of interest and importance to the community.  Making full use of our data requires documentation about the format, software that can read the format and provide analysis utility, and extensive metadata so that analyzers can make interpret or make use of the data.  Related efforts include TOPS, and more.  There are significant international investments in these efforts; US-based efforts will require funding models beyond the traditional short-term grant cycle.  Preservation efforts must be guaranteed for at least 10 years to see community uptake.
-  \item Interoperability. Re-using already-developed tools is an appealing way to reduce the software development burden that slows down experiments across the field.  To do this, data formats must be compatible with these tools.  The desire for interoperability has driven experiments to consider non-ROOT file formats like Parquet and HDF5.  This need has also created tools like uproot, which can read in ROOT files and present them in data formats that are compatible with common python libraries.
+  \item \textbf{Preservation.}  Reproducibility, training, open science, and principles of Findable, Accesible, Interoperable, and Reusable (FAIR)~\cite{Wilkinson2016} are increasingly of interest and importance to the community.  Making full use of our data requires documentation about the format, software that can read the format and provide analysis utility, and extensive metadata so that analyzers can make interpret or make use of the data.  Related efforts include TOPS, and more.  There are significant international investments in these efforts; US-based efforts will require funding models beyond the traditional short-term grant cycle.  Preservation efforts must be guaranteed for at least 10 years to see community uptake.
+  \item \textbf{Interoperability.} Re-using already-developed tools is an appealing way to reduce the software development burden that slows down experiments across the field.  To do this, data formats must be compatible with these tools.  The desire for interoperability has driven experiments to consider non-ROOT file formats like Parquet and HDF5.  This need has also supported tools like uproot, which can read in ROOT files and present them in data formats that are compatible with common python libraries.
 \end{itemize} 
 
 
@@ -233,7 +233,8 @@ Standalone files that are considered opaque to data-handling and cataloging soft
 
 \subsection{Findings and Recommendations}
 Experiments usually have global solutions for handling metadata involved in dataset cataloging and workflow control. However these solutions frequently are not available for individual analyses and users may need to develop bespoke solutions.\\
-\textbf{Recommendation:} Effort should be put into developing user-friendly data provenance and metadata storage systems that can be easily integrated into typical analysis tasks.
+Small experiments often struggle to implement even the global solutions; implementation difficulty does not scale down with experiment size and smaller experiments often lack personnel to devote to metadata systems.
+\textbf{Recommendation:} Effort should be put into developing user-friendly data provenance and metadata storage systems that can be easily integrated into typical analysis tasks.  Support for software developers across collaborations and support for multi-experiment metadata systems could help smaller experiments.
 
 \section{Collaborative Software}
 \begin{comment}
