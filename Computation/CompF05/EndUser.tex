@@ -55,7 +55,7 @@ The SGCI funding model is based on the XSEDE ECSS program.
 
 \subsection{Findings and Recommendations}
 A lot of transformative ideas are introduced to the HEP computing community and are implemented by early-career scientists (especially grad students and postdocs). Support for these physicists can be minimal, and the career trajectories are opaque.\\
-\textit{Recommendation.} Software work (especially with cross-experiment application) should receive stronger consideration for funding. More cross-experiment/frontier computing physicist positions could be created.  Funding agencies and frontiers need to work together to identify viable long-term funding patterns for this work.
+\textbf{Recommendation:} Software work (especially with cross-experiment application) should receive stronger consideration for funding. More cross-experiment/frontier computing physicist positions could be created.  Funding agencies and frontiers need to work together to identify viable long-term funding patterns for this work.
 
 % \section{Hardware Needs - Peter}
 % \section{Hardware Needs}
@@ -145,19 +145,19 @@ In order for the ecosystems to achieve long-term, sustainable success, we note t
 
 \subsection{Findings and Recommendations}
 There are two primary ecosystems developing for analysis in the next decade: one based on the ROOT libraries and one based on a collection of Python libraries. These projects have similar goals and scope but are organized differently and have different philosophies regarding industry tool use.\\
-\textit{Recommendation.} Development of both ecosystems should be supported. The friendly competition between the two has already resulted in significant improvements for users. Maintaining interoperability between the two (e.g. in data formats) should be a priority.
+\textbf{Recommendation:} Development of both ecosystems should be supported. The friendly competition between the two has already resulted in significant improvements for users. Maintaining interoperability between the two (e.g. in data formats) should be a priority.
 
 The main general purpose languages used in HEP today are C++ and Python. Projects such as PyROOT have enabled interoperability of these languages at a level not replicated by other options in HEP.\\
-\textit{Recommendation.} These two languages both have important roles to play in their respective niches and are expected to remain dominant in the near future. Other languages are generally unfamiliar to the community, have weak interoperability with existing libraries, and impose a maintenance burden if used without careful planning. Outside of bottom-up projects in other languages, or overwhelming domain-specific needs (e.g. JavaScript for visualization in web browsers), C++ and Python should be recommended. There is a reasonable concern about the efficiency of using interpreted languages in core analysis kernels, both in terms of computing resource use and consequent environmental impact. We recommend that the Python ecosystem community demonstrate that this issue has been addressed, and also ensure that just-in-time compiler technology (e.g. numba) is easy to integrate into user code.
+\textbf{Recommendation:} These two languages both have important roles to play in their respective niches and are expected to remain dominant in the near future. Other languages are generally unfamiliar to the community, have weak interoperability with existing libraries, and impose a maintenance burden if used without careful planning. Outside of bottom-up projects in other languages, or overwhelming domain-specific needs (e.g. JavaScript for visualization in web browsers), C++ and Python should be recommended. There is a reasonable concern about the efficiency of using interpreted languages in core analysis kernels, both in terms of computing resource use and consequent environmental impact. We recommend that the Python ecosystem community demonstrate that this issue has been addressed, and also ensure that just-in-time compiler technology (e.g. numba) is easy to integrate into user code.
 
 A number of domain-specific languages have been proposed to address problems in various spheres. Additionally, certain uses of Python (e.g. when scripting ML libraries, or working with RDataFrame) can be viewed as a DSL as they require library-specific knowledge.\\
-\textit{Recommendation.} ``High-level'' DSLs that attempt to describe analysis via high-level objects are unlikely to generalize well between experiments as often the ``primitives'' are too different, but can be useful in certain situations. The lower-level DSLs can be extremely useful where relevant, however effort should be taken to avoid unnecessary duplication of scope as this imposes burdens on users similar to using multiple general purpose languages.
+\textbf{Recommendation:} ``High-level'' DSLs that attempt to describe analysis via high-level objects are unlikely to generalize well between experiments as often the ``primitives'' are too different, but can be useful in certain situations. The lower-level DSLs can be extremely useful where relevant, however effort should be taken to avoid unnecessary duplication of scope as this imposes burdens on users similar to using multiple general purpose languages.
 
 The ROOT container file format is ubiquitous in HEP, and comes with a serialization scheme tightly linked to the ROOT libraries. Industry and non-HEP tools typically use other formats (e.g. Apache Parquet~\cite{Parquet} for the ROOT TTree), and efforts are ongoing to enable their use. In addition the ROOT team foresees an evolution of the TTree to the more-optimized RNtuple. Multiple independent implementations of ROOT I/O are available. As ROOT is specialized to the HEP use case, it supports features missing from other formats.\\
-\textit{Recommendation.} The ROOT file format is extremely important for ongoing experiments and historical data and compatibility must be maintained. Other formats have important use-cases. Tools to translate between formats, and to enable various ecosystems to ingest and produce them, should be maintained.
+\textbf{Recommendation:} The ROOT file format is extremely important for ongoing experiments and historical data and compatibility must be maintained. Other formats have important use-cases. Tools to translate between formats, and to enable various ecosystems to ingest and produce them, should be maintained.
 
 Software typically has low barriers to initial entry but significant ongoing maintenance requirements. New software projects are frequently initiated without much concern for long-term support (and this is reasonable since many bottom-up projects do not succeed).\\
-\textit{Recommendation.} Computing personnel should be funded specifically to maintain software projects identified as satisfying an important need in the community (for example, by the HEP Software Foundation~\cite{HSF}). 
+\textbf{Recommendation:} Computing personnel should be funded specifically to maintain software projects identified as satisfying an important need in the community (for example, by the HEP Software Foundation~\cite{HSF}). 
 
 
 \section{Analysis Models}
@@ -181,7 +181,7 @@ There is a recent trend towards using \textit{notebooks}, particularly those pro
 
 \subsection{Findings and Recommendations}
 Users need to be able to scale their analyses from simple tests on a small debugging dataset to full deployment over all data. In many cases this transition requires working in a different environment (a common case is transitioning from a local workstation, referring to specific files, to a batch job running on a catalogued dataset). This can involve significant difficulties for users and cause support issues.\\
-\textit{Recommendation.} There is unlikely to be a one-size-fits-all solution for all experiments. Recent work with interactive analysis facilities which provide extreme scaling capabilities to users through a single interface may address many of these issues; if successful the resulting software stacks should be made available to small experiments in a turnkey way.
+\textbf{Recommendation:} There is unlikely to be a one-size-fits-all solution for all experiments. Recent work with interactive analysis facilities which provide extreme scaling capabilities to users through a single interface may address many of these issues; if successful the resulting software stacks should be made available to small experiments in a turnkey way.
 
 
 \section{Dataset Bookkeeping and Formats}
@@ -257,7 +257,7 @@ Standalone files that are considered opaque to data-handling and cataloging soft
 
 \subsection{Findings and Recommendations}
 Experiments usually have global solutions for handling metadata involved in dataset cataloging and workflow control. However these solutions frequently are not available for individual analyses and users may need to develop bespoke solutions.\\
-\textit{Recommendation.} Effort should be put into developing user-friendly data provenance and metadata storage systems that can be easily integrated into typical analysis tasks.
+\textbf{Recommendation:} Effort should be put into developing user-friendly data provenance and metadata storage systems that can be easily integrated into typical analysis tasks.
 
 \section{Collaborative Software}
 \begin{comment}
@@ -291,44 +291,30 @@ Should we prefer centralized (e.g. lab-hosted) or decentralized (user-controlled
 Once software is built, mechanisms are needed to deliver the software to end users. The advent of the CernVM-File System (CernVM-FS) has greatly enhanced software distribution throughout the HEP field providing a scalable, reliable and low maintenance service~\cite{stewart_graeme_andrew_2020_4009114,Blomer:2011zz,7310920}. The long-term maintenance and development of this important infrastructure needs to be accepted as new challenges arise, notably scaling issues. \\
 External software products are managed and installed on file distribution services (i.e. CernVM-FS) through various different mechanisms. An example, for Fermilab-based experiments in particular, is access to external
 products provided by a Fermilab-developed product-management package called Unix Product
-Support (UPS), for selecting particular build flavors, and Unix Product Distribution (UPD) for uploading/downloading of products between local systems and distributions servers. Alternatives emerging and being adopted within HEP include open source package managers Spack~\cite{7832814}, Anaconda's conda~\cite{anaconda} and the package installer for Python, pip~\cite{pypi}. All of these options still require the necessary humanpower and expertise to deploy and maintain. 
+Support (UPS), for selecting particular build flavors, and Unix Product Distribution (UPD) for uploading/downloading of products between local systems and distributions servers. Alternatives emerging and being adopted within HEP include (but not limited to) open source package managers Spack~\cite{7832814}, Anaconda's conda~\cite{anaconda}, and the package installer for Python, pip~\cite{pypi}. All of these options still require the necessary humanpower and expertise to deploy and maintain. 
+The proliferation of different packaging options is not a new problem and was studied in detail within a HEP Software Foundation Packaging Working group report~\cite{l_sexton_kennedy_2016_1472340}. Such fruitful, frequent discussions and summaries are critical in order to keep abreast of recent developments, understand common problems with the aim of converging on common solutions. 
 
-Containers are an important part of job submission.
-Some pieces of software are so platform dependent that it's sometimes nearly impossible to replicate the framework on another machine.
-
+Containers are now also commonplace components for job submission. Some pieces of software are so platform dependent that it's sometimes nearly impossible to replicate the framework on another machine ,thus containers are a popular way to deploy applications but they do also come with some disadvantages, such as whilst they are a good tool for job submission, graphical applications do not work well, persistent storage is complicated,...for example. It is also another tool that users must be familiar with in their workflow and should have appropriate documentation and training materials.
   \item Project Management\\
-Fewer users employ bug-tracking or project management tools. 
-Some users use commercial programs such as Trello or Notion for project management or simple Google Docs/Sheets. There is some migration from Redmine Issue tracking to more modern GitHub Issues.
+Fewer users employ bug-tracking or project management tools. Some users use commercial programs such as Trello or Notion for project management on the individual level (far too expensive for large experiments) or simple, free Google Docs/Sheets. There is some migration to using GitHub Issues.
   \item Documentation\\
-Wikis, Doxygen. Did anyone teach you how to document your code?
-  zenodo, bitex (arxiv), inspire-hep
+Any given experiment may have found the a good solution for distributing software, or the right tool to facilitate communication amongst users but without appropriate attention to documentation this can lead to communication gaps, uninformed decisions, lack of transparency, wasted time, inefficient onboarding of new users, and an increased knowledge gap between experts and users.  Good documentation tools and practices can alleviate some of the pain of knowledge transfer, in the case of experts retiring or moving on to new projects/fields and new users joining. In practice a number of different tools are employed to encourage documentation: technical notes, wikis, Doxygen, Sphinx, GitHub wiki/issue tracking to name a few. Even with the right tool in place, the encouragement and incentive needs to be in place to provide said documentation and keep it up to date. This also couples with the training discussion in Sec.~\ref{sec:training}.
 
 \end{itemize}
 
-\subsection{Accessibility issues}
-Overlaps with training \& documentation.
-How much of “how to do things” lives in private or hard-to-search channels?
+\subsection{Accessibility}
+The question of accessibility for end users overlaps with training \& documentation. It is difficult to quantify how much of “how to do things” lives in private or hard-to-search communication forums/channels
 How much do these tools enable “chatting with colleagues” and can we improve that?
 
 
 Experiment analysis software \& environments should be encouraged to guide people towards constructing reproducible and archivable analyses from the start.
-Incentives are needed for supporting existing code vs. re-inventing the wheel when unnecessary.
-
-\begin{comment}
-Tools for collaboration
-git
-Many people love git
-Some people feel that more git training is needed
-\end{comment}
-
-
-Should this include a discussion on software citations, such as via Zenodo or such?
+Incentives are needed for supporting existing code versus re-inventing the wheel when unnecessary.
 
 \subsection{Findings and Recommendations}
 The “full” analysis stack of an experiment also includes software that enables interaction between analyzers. This includes documentation of the experiment's code, messaging between users, discussion forums, software version control, bug tracking, and document workflow management. Especially for small experiments, setting up this infrastructure from scratch can be daunting both in effort and cost.\\
-\textit{Recommendation.} Access to a full stack of these services should be provided to funded experiments.  XSEDE/ACES could also play an important role here as some laboratories have onerous access requirements.
+\textbf{Recommendation:} Access to a full stack of these services should be provided to funded experiments.  XSEDE/ACES could also play an important role here as some laboratories have onerous access requirements.
 
-\section{Training}
+\section{Training}\label{sec:training}
 
 We do not have the expertise we need for the computational work of upcoming physics.  The question our community must address is: where can this expertise come from?  Listed below are the current training efforts common in the cosmic frontier. 
 
@@ -360,12 +346,12 @@ In the past, such common training efforts have suffered from the  tight connecti
 
 \subsection{Findings and Recommendations}
 There are many cases where experiments are limited by the availability of personnel trained in various aspects of computing. All students need to be trained in the software and languages used for analysis; beyond that, specialized training may be needed for specific areas, such as GPU use or code optimization. Many traditional avenues (e.g. dedicated academic classes or industry training) may not be a good match to needs or affordable. There are significant efforts through the HEP Software Foundation and other initiatives to develop effective training for HEP software. Software training has a direct connection to concerns about diversity, equity, and inclusion.\\
-\textit{Recommendation.}  We need to support collaborations focused on learning best practices from education research, industry, and assessment. In addition, we need to explore and understand the scalability of various approaches to training within our field.  Funding should be made available for the development and hosting of training materials, instructor training, and should include partnerships with education researchers to ensure these efforts are effective.
+\textbf{Recommendation:}  We need to support collaborations focused on learning best practices from education research, industry, and assessment. In addition, we need to explore and understand the scalability of various approaches to training within our field.  Funding should be made available for the development and hosting of training materials, instructor training, and should include partnerships with education researchers to ensure these efforts are effective.
 
 \section{Long-Term Preservation}
 \subsection{Findings and Recommendations}
 Transitioning from the way an analysis is actually done to a “packaged” version that can be rerun by an outsider from scratch is typically complex, as the entire workflow is rarely described in a single place. This causes people to see long-term preservation as an additional burden whose benefits they will not see.\\
-\textit{Recommendation.} Provide pipelines to nudge users into choosing practices compatible with long-term preservation as the default. These need to be considered and built in to the structure of analysis systems at the start, not bolted on at the end.
+\textbf{Recommendation:} Provide pipelines to nudge users into choosing practices compatible with long-term preservation as the default. These need to be considered and built in to the structure of analysis systems at the start, not bolted on at the end.
 
 \section{Thoughts}
 Must have support mechanisms for both bottom-up and top-down development \& long-term support
