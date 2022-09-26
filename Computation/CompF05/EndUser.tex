@@ -9,7 +9,7 @@
 \chapter{End User Analysis for Particle Physics Computation}
 
 \authorlist{G.~S.~Davies, P.~Onyisi, A.~Roberts}
-   {(contributors from the community)}
+   {(and contributors from the community)}
 
 \section{Executive Summary}
 
@@ -27,31 +27,8 @@ Analysis activities include, but are not limited to:
   \item Cross section measurements
 \end{itemize}
 
-
-\section{People do software work} 
-
-\subsection{Problems}
-\begin{itemize}
-    \item Lack of long-term support for software efforts (grant cycle is three years)
-    \item Software efforts are siloed by collaboration - it's rare for people to be funded for cross-experiment software efforts.  E.g. if Peter writes a package that another collaboration wants to use, it is not a common pattern for that collaboration to fund him for that support.  Need mechanisms for people to get partial support to work beyond their immediate use cases.  And also for a field to say, ``yes, this software is important!"
-    \item Recognition that supports stable careers for sustainable software work
-    \item Misalignment between what we need for good software and what the field recognizes as valid work
-    \item What else?
-\end{itemize}
-
-
-\subsection{Personnel support case studies}
-\paragraph{PDG}
-The PDG is recognized as important despite not being innovative.  We all expect the PDG to be there.
-
-\paragraph{ROOT}
-They don't have funding cycles? \cite{Naumann:2022pub}
-
-\paragraph{XSEDE ACCESS ECSS/SGCI}
-
-The SGCI funding model is based on the XSEDE ECSS program.
-
-\paragraph{CTEQ}
+Community discussions converged on categorising End User Analysis into five distint sub-topics: \textit{Analysis Ecosystems} which includes Libraries, Languages, and Data Formats, \textit{Analysis Models}, \textit{Dataset Bookkeeping and Formats}, \textit{Collaborative Software}, and \textit{Training}.
+This report identifies impediments to end user analysis and potential avenues to address such issues, that have been informed by discussions with the user community and backed up by submitted letters of interest, white papers, and other publicly available material.
 
 
 \subsection{Requirements for a Sustainable End-User Software Ecosystem}
@@ -63,11 +40,6 @@ In order for the ecosystems to achieve long-term, sustainable success, we note t
     \item \textbf{Documentation and Training.} Analysis software ecosystems are used as a gestalt --- not as a disconnected set of packages. 
     \item \textbf{Interoperability.} Ecosystem lock-in can be a problem for multiple reasons. Packages that can only be used in a single ecosystem will not provide benefits to users not in that ecosystem. 
 \end{itemize}
-
-
-\subsection{Findings and Recommendations}
-A lot of transformative ideas are introduced to the HEP computing community and are implemented by early-career scientists (especially grad students and postdocs). Support for these physicists can be minimal, and the career trajectories are opaque.\\
-\textbf{Recommendation:} Software work (especially with cross-experiment application) should receive stronger consideration for funding. More cross-experiment/frontier computing physicist positions could be created.  Funding agencies and frontiers need to work together to identify viable long-term funding patterns for this work.
 
 % \section{Hardware Needs - Peter}
 % \section{Hardware Needs}
@@ -300,17 +272,16 @@ Containers are now also commonplace components for job submission. Some pieces o
   \item Project Management\\
 Fewer users employ bug-tracking or project management tools. Some users use commercial programs such as Trello or Notion for project management on the individual level (far too expensive for large experiments) or simple, free Google Docs/Sheets. There is some migration to using GitHub Issues.
   \item Documentation\\
-Any given experiment may have found the a good solution for distributing software, or the right tool to facilitate communication amongst users but without appropriate attention to documentation this can lead to communication gaps, uninformed decisions, lack of transparency, wasted time, inefficient onboarding of new users, and an increased knowledge gap between experts and users.  Good documentation tools and practices can alleviate some of the pain of knowledge transfer, in the case of experts retiring or moving on to new projects/fields and new users joining. In practice a number of different tools are employed to encourage documentation: technical notes, wikis, Doxygen, Sphinx, GitHub wiki/issue tracking to name a few. Even with the right tool in place, the encouragement and incentive needs to be in place to provide said documentation and keep it up to date. This also couples with the training discussion in Sec.~\ref{sec:training}.
+Any given experiment may have found the a good solution for distributing software, or the right tool to facilitate communication amongst users but without appropriate attention to documentation this can lead to communication gaps, uninformed decisions, lack of transparency, wasted time, inefficient onboarding of new users, and an increased knowledge gap between experts and users.  Good documentation tools and practices can alleviate some of the pain of knowledge transfer, in the case of experts retiring or moving on to new projects/fields and new users joining. In practice a number of different tools are employed to encourage documentation: technical notes, wikis, Doxygen, Sphinx, GitHub wiki/issue tracking to name a few. Even with the right tool in place, the encouragement and incentive needs to be in place to provide said documentation and keep it up to date. This also couples with the training discussion in Sec.~\ref{sec:training}. Internal experiment-specific surveys identify the need for improved documentation and working examples as key to end users being able to perform analyses.
 
 \end{itemize}
 
 \subsection{Accessibility}
-The question of accessibility for end users overlaps with training \& documentation. It is difficult to quantify how much of “how to do things” lives in private or hard-to-search communication forums/channels
+The topic of accessibility for end users overlaps with training \& documentation. It is difficult to quantify how much of “how to do things” lives in private or hard-to-search communication forums/channels
 How much do these tools enable “chatting with colleagues” and can we improve that?
 
 
 Experiment analysis software \& environments should be encouraged to guide people towards constructing reproducible and archivable analyses from the start.
-Incentives are needed for supporting existing code versus re-inventing the wheel when unnecessary.
 
 \subsection{Findings and Recommendations}
 The “full” analysis stack of an experiment also includes software that enables interaction between analyzers. This includes documentation of the experiment's code, messaging between users, discussion forums, software version control, bug tracking, and document workflow management. Especially for small experiments, setting up this infrastructure from scratch can be daunting both in effort and cost.\\
@@ -351,12 +322,45 @@ There are many cases where experiments are limited by the availability of person
 \textbf{Recommendation:}  We need to support collaborations focused on learning best practices from education research, industry, and assessment. In addition, we need to explore and understand the scalability of various approaches to training within our field.  Funding should be made available for the development and hosting of training materials, instructor training, and should include partnerships with education researchers to ensure these efforts are effective.
 
 \section{Long-Term Preservation}
+The scope and details about Long-Term Preservation is covered by a dedicated topical group \textit{Reinterpretation and Long-Term Preservation of Data and Code} within the Computational Frontier therefore we direct the reader to that section of the full report. Nevertheless we provide a recommendation in the context of end users and their interaction with long-term preservation.
 \subsection{Findings and Recommendations}
 Transitioning from the way an analysis is actually done to a “packaged” version that can be rerun by an outsider from scratch is typically complex, as the entire workflow is rarely described in a single place. This causes people to see long-term preservation as an additional burden whose benefits they will not see.\\
 \textbf{Recommendation:} Provide pipelines to nudge users into choosing practices compatible with long-term preservation as the default. These need to be considered and built in to the structure of analysis systems at the start, not bolted on at the end.
 
-\section{Thoughts}
-Must have support mechanisms for both bottom-up and top-down development \& long-term support
+\section{End Users}
+
+At the core of end user analysis are the users themselves, the people doing the software work. Before users can consider pursuing innovative ideas, the general challenge of maintaining existing software and computing infrastrucure persists. This is a problem exacerbated further in small experiments~\cite{arxiv.2203.07645}. The use of common tools can partly mitigate this problem but this does not address the lack of long-term support for software efforts, when one considers a typical grant funding cycle is three years. Incentives are needed for supporting existing code versus re-inventing the wheel when unnecessary, although a balance is needed here in order to not stifle innovation. One concern is that letting "a thousand flowers bloom" can also lead to a long-term maintenace problem. Incentives should also couple with recognition that supports stable career paths for sustainable software work. There is all too often a misalignment between what the field recognizes as valid work and what an experiments needs in terms of functioning software. In the case of early careeer scientists, software maintenance and documentation can often sideline them for the traditionally recognised physics analysis work. Additionally, software efforts are siloed by collaboration; it is rare for users to be funded for cross-experiment software efforts. Development of tools for one particular experiment can often times find equal utility for other experiments~\cite{arxiv.2203.13768}. We need mechanisms for people to obtain partial support to work beyond their immediate use cases. We must have support mechanisms for both bottom-up and top-down development \& long-term support.
+
+\begin{comment}
+  \subsection{Problems}
+  \begin{itemize}
+      \item Lack of long-term support for software efforts (a typical grant cycle is three years)
+      \item Software efforts are siloed by collaboration - it is rare for people to be funded for cross-experiment software efforts.  E.g. if Peter writes a package that another collaboration wants to use, it is not a common pattern for that collaboration to fund him for that support.  We need mechanisms for people to get partial support to work beyond their immediate use cases.  And also for a field to say, ``yes, this software is important!". 
+      % is it appropriate to use a particular example here? i.e in neutrino land, CAFAna is an analysis framework originally developed for neutrino oscillation analysis with NOvA, and has been adopted for use as an analysis option for DUNE and SBN. added citation in the text.                                                                          
+      \item Incentives are needed for supporting existing code versus re-inventing the wheel when unnecessary, although a balance is needed here in order to not stifle innovation. This issue is that letting "a thousand flowers bloom" can also lead to a maintenace problem.
+      \item Recognition that supports stable careers for sustainable software work
+      \item Misalignment between what we need for good software and what the field recognizes as valid work
+  \end{itemize}
+\end{comment}
+\begin{comment}
+\subsection{Personnel support case studies}
+\paragraph{PDG}
+The PDG is recognized as important despite not being innovative.  We all expect the PDG to be there.
+
+\paragraph{ROOT}
+They don't have funding cycles? \cite{Naumann:2022pub}
+
+\paragraph{XSEDE ACCESS ECSS/SGCI}
+
+The SGCI funding model is based on the XSEDE ECSS program.
+
+\paragraph{CTEQ}
+
+\end{comment}
+
+\subsection{Findings and Recommendations}
+A lot of transformative ideas are introduced to the HEP computing community and are implemented by early-career scientists (especially grad students and postdocs). Support for these physicists can be minimal, and the career trajectories are opaque.\\
+\textbf{Recommendation:} Software work (especially with cross-experiment application) should receive stronger consideration for funding. More cross-experiment/frontier computing physicist positions could be created.  Funding agencies and frontiers need to work together to identify viable long-term funding patterns for this work.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %  If you would like to use BibTEX for the bibliography, please feel free to do so.  It is not required.
