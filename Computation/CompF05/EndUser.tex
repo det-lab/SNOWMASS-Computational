@@ -53,6 +53,18 @@ The SGCI funding model is based on the XSEDE ECSS program.
 
 \paragraph{CTEQ}
 
+
+\subsection{Requirements for a Sustainable End-User Software Ecosystem}
+A choice of software stacks is becoming available for HEP analysis. It is generally thought that the ROOT and Python stacks have different strengths and will competitively coexist into the future.
+
+In order for the ecosystems to achieve long-term, sustainable success, we note the following requirements:
+\begin{itemize}
+    \item \textbf{Support of Personnel.} Unsupported software projects undergo ``code rot'' over time, a process where changes external to the package itself cause it to lose functionality. In the Python ecosystem, for example, the migration from Python 2 to Python 3 rendered old versions of packages unusable. For this reason alone, it is mandatory that any software that forms a key part of a HEP analysis ecosystem must have a maintainer who is able to provide the necessary level of support for the package. The community must understand that maintenance is a task of equivalent importance to developing new code, and recognize people's work appropriately. There must also be a mechanism for transferring responsibility for a package as necessary.
+    \item \textbf{Documentation and Training.} Analysis software ecosystems are used as a gestalt --- not as a disconnected set of packages. 
+    \item \textbf{Interoperability.} Ecosystem lock-in can be a problem for multiple reasons. Packages that can only be used in a single ecosystem will not provide benefits to users not in that ecosystem. 
+\end{itemize}
+
+
 \subsection{Findings and Recommendations}
 A lot of transformative ideas are introduced to the HEP computing community and are implemented by early-career scientists (especially grad students and postdocs). Support for these physicists can be minimal, and the career trajectories are opaque.\\
 \textbf{Recommendation:} Software work (especially with cross-experiment application) should receive stronger consideration for funding. More cross-experiment/frontier computing physicist positions could be created.  Funding agencies and frontiers need to work together to identify viable long-term funding patterns for this work.
@@ -88,7 +100,7 @@ The long history of ROOT in HEP means that similar featuresets have sometimes be
 Ecosystems associated with other programming languages, notably Java \cite{Chekanov:2020bja}, Go \cite{Binet:2018xcc}, and Julia~\cite{bezanson2017julia}, have been developed and seen use in certain situations. Adoption of these is coupled to use of the relevant languages in the community, which at the moment is minimal.
 
 \subsection{Programming Languages}
-Users interact with software libraries and packages through programming languages. These can be separated into general-purpose languages (GPLs) which can be used for any task, and domain-specific languages (DSLs) (ROOT TCut, PAW kumac, etc.) which provide a restricted set of higher-level primitives which simplify certain operations. The two most commonly-used general-purpose languages in HEP are C++ and Python. Examples of domain-specific languages are the TCut syntax used for applying selections and constructing new variables in ROOT, and the kumac language used to control the old FORTRAN-based PAW suite.
+Users interact with software libraries and packages through programming languages. These can be separated into general-purpose languages (GPLs) which can be used for any task, and domain-specific languages (DSLs) which provide a restricted set of higher-level primitives which simplify certain operations. The two most commonly-used general-purpose languages in HEP are C++ and Python. Examples of domain-specific languages are the TCut syntax used for applying selections and constructing new variables in ROOT, and the kumac language used to control the old FORTRAN-based PAW suite.
 
 General-purpose languages, by definition, are extremely capable and are used to solve problems outside of HEP. Exposure to these languages is one of the major technical skills that is transferable outside the field. It is considered necessary for HEP students to develop familiarity with, and preferably proficiency in, at least one general-purpose language. It is not necessarily the case that the languages that are used in HEP are the ones prevalent in the industries that particle physicists transition to (for example, R is widely-used in data science and virtually unknown in HEP). Because of their complexity, the time it takes to train personnel in them, and the need to transfer responsibilities for maintaining code from one person to another, the diversity of general-purpose languages used in the field is strictly limited. By contrast, domain-specific languages historically have been easier to master due to the limited range of constructs available.
 
@@ -132,16 +144,6 @@ Previous generations of analysis libraries supported interactive visualization t
 The ROOT ecosystem's visualization libraries are naturally matched to the specific HEP use case. Visualization in the Python ecosystem is typically handled through the Python matplotlib~\cite{Hunter:2007} package, a standard for scientific plot creation; matplotlib does not directly support a number of common HEP plot forms or histogram structure formats, so additional libraries have been written to help bridge these boundaries.
 
 Although event displays are not typically used as part of an analysis workflow, they are still of interest to end users, and the same issues apply. Work is being done on experiment-agnostic event displays that render in browsers using JavaScript.
-
-\subsection{Requirements for a Sustainable End-User Software Ecosystem}
-A choice of software stacks is becoming available for HEP analysis. It is generally thought that the ROOT and Python stacks have different strengths and will competitively coexist into the future.
-
-In order for the ecosystems to achieve long-term, sustainable success, we note the following requirements:
-\begin{itemize}
-    \item \textbf{Support of Personnel.} Unsupported software projects undergo ``code rot'' over time, a process where changes external to the package itself cause it to lose functionality. In the Python ecosystem, for example, the migration from Python 2 to Python 3 rendered old versions of packages unusable. For this reason alone, it is mandatory that any software that forms a key part of a HEP analysis ecosystem must have a maintainer who is able to provide the necessary level of support for the package. The community must understand that maintenance is a task of equivalent importance to developing new code, and recognize people's work appropriately. There must also be a mechanism for transferring responsibility for a package as necessary.
-    \item \textbf{Documentation and Training.} Analysis software ecosystems are used as a gestalt --- not as a disconnected set of packages. 
-    \item \textbf{Interoperability.} Ecosystem lock-in can be a problem for multiple reasons. Packages that can only be used in a single ecosystem will not provide benefits to users not in that ecosystem. 
-\end{itemize}
 
 \subsection{Findings and Recommendations}
 There are two primary ecosystems developing for analysis in the next decade: one based on the ROOT libraries and one based on a collection of Python libraries. These projects have similar goals and scope but are organized differently and have different philosophies regarding industry tool use.\\
@@ -251,7 +253,7 @@ Users need to be able to obtain the input data for their analyses at the sites w
 
 Data catalogs are useful even when the data are all stored in a single site, since they group related files into datasets and store useful, queryable metadata. When storage resources are distributed then catalogs become even more critical. Data placement is beyond the scope of this report but can be handled by systems that also provide a data catalog, such as Rucio \cite{Barisits:2019fyl}.
 
-Data delivery to analysis tasks can be handled in a number of ways. On a small scale, the data may be provided via a POSIX filesystem (possibly networked). At a large scale, the data may need to be copied or streamed between locations over a wide area network. When multiple sites are involved, issues of authentication and identity management need to be addressed; maintaining multiple distinct accounts can be a heavy burden to users. Federated identity management and token-based authorization can address these issues.  Data transfer to a user job from remote storage can be handled in various ways; a common HEP standard is the xrootd protocol, which supports partial file reads (useful for minimizing network bandwidth if only a subset of data are to be read). Large-scale, distributed storage in industry is generally provided via object stores, for which the S3 protocol is the natural choice.
+Data delivery to analysis tasks can be handled in a number of ways. On a small scale, the data may be provided via a POSIX filesystem (possibly networked). At a large scale, the data may need to be copied or streamed between locations over a wide area network. When multiple sites are involved, issues of authentication and identity management need to be addressed; maintaining multiple distinct accounts can be a heavy burden to users. Federated identity management and token-based authorization can address these issues.  Data transfer to a user job from remote storage can be handled in various ways; a common HEP standard is the xrootd protocol, which robustly supports partial file reads (useful for minimizing network bandwidth if only a subset of data are to be read). Large-scale, distributed storage in industry is generally provided via object stores, for which the S3 protocol is the natural choice.
 
 Standalone files that are considered opaque to data-handling and cataloging software, and only interpreted by end-user code, are not the only possible way to store and provide data. ``Intelligent'' infrastructure can provide a database-like view of datasets, enabling event selection and column reduction as a service (see e.g.\ \cite{Galewsky:2020xig}). User code need never interact with the ``native'' data format at all. In such an architecture the backend data store may itself be structured as a database \cite{Gutsche:2020kmd}. Work in this direction may be able to leverage advances in computational storage technology.
 
