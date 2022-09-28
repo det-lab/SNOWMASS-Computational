@@ -1,0 +1,107 @@
+2004.13687.pdf:code, are discussed in detail in Ref. [207]. A key com-      5. Promote collaboration, training, funding and career
+2004.13687.pdf:non-technical (e.g. funding, training and careers) also       pointed out that the role of the WG in this context
+2004.13687.pdf:part of the Marie Sklodowska-Curie Innovative Train-          14. HEP Software Foundation, A Roadmap for HEP Soft-
+2005.10289.pdf:innovation programme as part of the Marie Skłodowska-Curie Innovative Training Network
+2008.13636.pdf:benefit [9]. This requires improved training and the development of a curriculum for all
+2105.12962.pdf:396021762–TRR 257. RS acknowledges support of the DFG through the research training
+2106.01393.pdf:program as part of the Marie Skłodowska-Curie Innovative Train-                     PhysRevLett.114.051801. arXiv:1410.6315.
+2109.14938.pdf:[17] MCnet — a European Union funded Marie Curie Initial Training Network.
+2111.02442.pdf:gramme as part of the Marie Skłodowska-Curie Innovative Training Network MCnetITN3
+2112.12593.pdf:       (both in terms of number of personnel and training), timeliness of the measurement, lead time to deployment,
+2202.02194.pdf:knowledge and fostering connections, and (c) through training and education. The
+2202.05838.pdf:[38] Jiaming Song, Shengjia Zhao, and Stefano Ermon, “A-NICE-MC: Adversarial training for MCMC,” in Advances in
+2202.05838.pdf:alongside publications. To these ends, centralized infrastructure will be needed to enable sharing of trained models
+2203.00042.pdf:research effort has served as a training ground for physics, nuclear engineering and policy students and postdoctoral fellows,
+2203.05484.pdf:       searches. Proceedings, 1st Joint ILIAS-CERN-CAST axion training, Geneva, Switzerland,
+2203.05525.pdf:   The UZH collaborators are registered users of the microscope center, with training and access to the
+2203.06093.pdf:Materials are trained and qualified to run those tools and processes.
+2203.06142.pdf:  Research Training Network 2149 ”Strong and Weak Interactions - from Hadrons to Dark Matter”.
+2203.06142.pdf:  Training Network 2149 ”Strong and Weak Interactions - from Hadrons to Dark Matter”.
+2203.06146.pdf:tool for training a future workforce by providing hands-on experience in the operation of
+2203.06216.pdf:require resources for training, software, testbeam, and personnel.
+2203.06255.pdf:and training, given that the development, maintenance and support associated with the
+2203.06562.pdf:dedicated education and training. Important consolidation of the some better-established
+2203.06795.pdf:    ment of joint simulation/modeling/analysis tools, as well as training/education for the next
+2203.06795.pdf:ulations, associated modeling, coordination of data sharing, survey strategy, and training for the
+2203.06816.pdf:VI.    EDUCATION AND TRAINING
+2203.06853.pdf:discussion. It is difficult to train and retain early career scientists with expertise on intersectional
+2203.07214.pdf:The training and mentoring of a skilled, creative, and diverse workforce is not only
+2203.07237.pdf:Building such know-how requires dedicated effort in terms of training knowledgeable domain
+2203.07328.pdf:graduate programs should offer training (e.g., in a class, seminar, or through a broader institu-
+2203.07360.pdf:the training of future developers.
+2203.07479.pdf:under different detector configurations, and to provide liquid-handling and ESH training for the scientific community.
+2203.07614.pdf:  VI.  NEED FOR EXPERTS AND THEIR TRAINING (THE “HUMAN CHALLENGE”)
+2203.07614.pdf:intensive training plans for both application developers and end users.
+2203.07614.pdf:recruit, train, and retain teams of experts, as well as to create attractive career paths for people
+2203.07622.pdf:    Cryomodule assembly requires a dedicated facility with large clean rooms, especially trained,
+2203.07622.pdf:[178] E. Barzi, G. Bellettini, S. Donati and C. Luongo, The Science Training Program for Young
+2203.07638.pdf:in remote conditions and near-space environments, and in training of future scientists.
+2203.07645.pdf:the best source of training for young physicists, and open-access datasets support out-
+2203.07645.pdf:those investments. This means adding time for documentation, training, and outreach.
+2203.07645.pdf:via documentation and training. NESAP is evolving with the types of systems we deploy,
+2203.07646.pdf:       resulting in trained workforce. This cost-effective, compact design, with technologies useful for a broad
+2203.07700.pdf:    • The continuation of Geant4 [78] support and training within the community.
+2203.07804.pdf:is worth stressing the training provided at all education levels by this marvelous scientific
+2203.07919.pdf:a High power cyclotrons are “More diagnostics and simulations” + “well trained operators
+2203.07995.pdf:organization based in Oakland, California [1]. It provides job training and employment pro-
+2203.08010.pdf:     The proposed forum would also provide a mechanism for joint training sessions. Each
+2203.08056.pdf:the future tools, a broad perspective must be taken to train and engage students in the
+2203.08059.pdf:and Deutsche Forschungsgemeinschaft DFG (Research Training Groups Grants No.,
+2203.08088.pdf:    A long-term commitment to build expertise through new hires and training is not a small issue,
+2203.08335.pdf:    • User support, high-quality and detailed documentations, online tutorials, and training.
+2203.08335.pdf:  7.3 Training and education . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .  36
+2203.08335.pdf:7 Sustainability, reliability, user support, training                                               31
+2203.08335.pdf:reliability, long-term sustainability, user support and training are covered next, followed by an
+2203.08338.pdf:                                          ture and researcher training faced by direct-detection dark matter (DM) and
+2203.08338.pdf:riodic topical telecons, training, and some common forum for discussion. There
+2203.08425.pdf:                                                                                                                                   on the path to a TeV collider, as well as training of the
+2203.08631.pdf:that people are hired due to their unique abilities and training, the burden of carrying out
+2203.08748.pdf:Physics (IRIS-HEP) organization to caption training videos as this training on using the
+2203.08809.pdf:                                                         can greatly enable such participation. A major effort in software training has been organized
+2203.08811.pdf:    • Specialized facilitator training.
+2203.08916.pdf:Many respondents called for training, provided to and easily accessible to all rather than only
+2203.08919.pdf:AS&E for specialized postgraduate training, and even less likely to have acquired core components of the background,
+2203.08919.pdf:US discovery sciences and high technology that we recruit, train, and inspire a strong technical workforce to support the
+2203.08973.pdf:      across the team shared access to CAD/EDA tools, training, and support.
+2203.09336.pdf:   Researchers in particle physics have been well-positioned to provide such training for many decades now. The scale
+2203.09718.pdf:[23] Emanuela Barzi et al., “The Science Training Program for Young Italian Physicists and Engineers at Fermilab”,
+2203.09886.pdf:new analysis ideas or train the next generation of physicists. It is therefore critical to preserve
+2203.09945.pdf:efficiently with a large and not always professionally trained user community to run on all
+2203.10057.pdf:diverse content can inspire and inform new analysis ideas or train the new generation
+2203.10060.pdf:                                                  Research, education and training in high energy physics (HEP) often draw international
+2203.10377.pdf:  •   industry-laboratory collaboration in recruitment and training of the necessary qualified
+2203.10393.pdf:       when reading letters of recommendation) and to mitigate them. The training should
+2203.10393.pdf:   4. Training search committees to identify their own biases and that of others (for example,
+2203.10953.pdf:collaboration with undergraduate program leaders for training undergraduate educators in the
+2203.11110.pdf:Sklodowska-Curie Innovative Training Network MCnetITN3 (grant agreement no. 722104).
+2203.11226.pdf:messenger astrophysics – requires support for development, training, deployment and
+2203.11290.pdf:    3. Educate and train future scientists and engineers.
+2203.11508.pdf:        K. A. (2022a). Informal Socialization in Physics Training. arXiv, Article arXiv:2203.11518
+2203.11513.pdf:Participants in implicit bias training will likely continue to perpetuate harm, making such
+2203.11518.pdf:         Protege: one who is protected or trained or whose career is furthered by a person of
+2203.11523.pdf:Socialization in Physics Training, and Policing and Gatekeeping in STEM—that make significant
+2203.11662.pdf:education research to the broader collaboration’s training opportunities, such as the CMS
+2203.13923.pdf:tunities for training of students and postdocs, who develop mathematical and theoretical skills applicable in many
+2203.14706.pdf:2.2. Workforce Training
+2203.15128.pdf:of an ELP may include business preparation / training, a means for licensing laboratory
+2203.15978.pdf:from the HEP community. A robust program for workforce training is required in addition
+2204.00001.pdf:Research Training Group “Particle Physics beyond the Standard Model” (GK 1994) on
+2204.03381.pdf:proper education, training, and retention of the next generation of scientists is critical, and must
+2204.03713.pdf:                       in F1.3, b) training in project management, ombudsperson roles, and victim-centered
+2204.03713.pdf:     • Consider hiring scientific writers to produce better documentation and training modules. This would
+2204.07285.pdf:    • Provide self-guided training guides/examples for system/sub-system blocks.
+2204.07285.pdf:information in a searchable form & providing HEP specific training for incoming generations
+2204.08983.pdf:                                                   ticle physics should normalize training for indus-               3. Finding: Professional skills, such as technical
+2204.08983.pdf:collaboration workshops, and “mentoring or peer learn-              tific career than would any alternative train-
+2206.01849.pdf:Students [9] “sponsor[s] workforce training programs designed to motivate students and
+2207.00122.pdf:    • Training materials useful for first-time participants and for those that need a refresher
+2207.00124.pdf:science means that it has a very active government engagement group with its own training
+2207.00125.pdf:    • Provide communications training to interested scientists as widely as possible.
+2207.00125.pdf:as grants focused on training students in certain areas (“traineeships”), and “Accelerator
+2207.07508.pdf:the ethics committee just because our presence was better publicized. Since people without training should
+2207.09060.pdf:                                                      available materials for use in education, training and workforce development. They are
+2208.06030.pdf:available experts or to create (attract or train) the team adequate to the task (see also below in Sec.5.4).
+2208.07910.pdf:does not with “theorists”. This could be addressed with a more integrated training of “ex-
+2209.06755.pdf:   ●      The next point of contact for violations should be a devoted and trained CoC group of at least two people to
+2209.06755.pdf:The problem is so extensive that the 2022 APS Council Speaker Robin Sellinger has been focusing on adequate training
+2209.10109.pdf:                                                                a set of software training modules for the first few weeks. These were interleaved with a series
